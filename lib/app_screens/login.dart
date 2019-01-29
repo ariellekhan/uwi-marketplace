@@ -1,6 +1,7 @@
 //SOURCE: https://github.com/putraxor/flutter-login-ui/tree/master/lib
 
 import 'package:flutter/material.dart';
+import 'signup.dart';
 
 class LoginPage extends StatefulWidget {
   static String tag = 'login-page';
@@ -15,7 +16,7 @@ class _LoginPageState extends State<LoginPage> {
       tag: 'hero',
       child: CircleAvatar(
         backgroundColor: Colors.transparent,
-        radius: 48.0,
+        radius: 70.0,
         child: Image.asset('images/logo.png'),
       ),
     );
@@ -62,11 +63,24 @@ class _LoginPageState extends State<LoginPage> {
         'Forgot password?',
         style: TextStyle(color: Colors.black54),
       ),
-      onPressed: () {},
+      onPressed: () {
+        // ADD LOGIC
+      }
+    );
+
+    final newUserLabel = FlatButton(
+    child: Text(
+    'New here? Sign Up',
+    style: TextStyle(color: Colors.black38),
+    ),
+    onPressed: () {
+       Navigator.of(context).pushNamed(SignUp.tag);
+     }
     );
 
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: AppBar(title: Text('UWI MARKETPLACE'), backgroundColor: Colors.lightBlueAccent,),
       body: Center(
         child: ListView(
           shrinkWrap: true,
@@ -79,10 +93,23 @@ class _LoginPageState extends State<LoginPage> {
             password,
             SizedBox(height: 24.0),
             loginButton,
-            forgotLabel
+            Row(
+              children: <Widget>[
+                Expanded (
+                  child: forgotLabel,
+                ),
+                Expanded (
+                  child: newUserLabel,
+                ),
+              ],
+
+            )
+
+
           ],
         ),
       ),
     );
+
   }
 }
