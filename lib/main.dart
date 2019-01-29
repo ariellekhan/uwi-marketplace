@@ -6,18 +6,18 @@ import './app_screens/signup.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-//  final routes = <String, WidgetBuilder>{
-//    LoginPage.tag: (context) => LoginPage(),
-//    HomePage.tag: (context) => HomePage(),
-//  };
+  final routes = <String, WidgetBuilder>{
+    LoginPage.tag: (context) => LoginPage(),
+    SignUp.tag: (context) => SignUp(),
+  };
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'UWI Marketplace',
-        home: LoginPage()
-//        routes: routes,
+        home: LoginPage(),
+        routes: routes,
     );
   }
 }
