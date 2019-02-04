@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "452622252957",
+    "firebase_url": "https://bookapp-a9a91.firebaseio.com",
+    "project_id": "bookapp-a9a91",
+    "storage_bucket": "bookapp-a9a91.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:452622252957:android:093841650f622586",
+        "android_client_info": {
+          "package_name": "com.example.uwimarketplace"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "452622252957-5a1j4aiqu4thsfjhtg9qtiaoglt520te.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArpFPQ_CxXzvRi1HiuUwUMIwNrUHD_U98"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

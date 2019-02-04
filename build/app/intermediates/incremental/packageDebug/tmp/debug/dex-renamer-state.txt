@@ -1,0 +1,4 @@
+#Sun Feb 03 21:31:46 BOT 2019
+base.0=C\:\\Github\\uwi-marketplace\\build\\app\\intermediates\\transforms\\dexMerger\\debug\\0
+path.0=classes.dex
+renamed.0=classes.dex

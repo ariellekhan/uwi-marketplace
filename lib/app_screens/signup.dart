@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import '../authentication.dart';
 
 class SignUp extends StatefulWidget {
   static String tag = 'signup-page';
@@ -9,6 +12,9 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  FirebaseAuth mAuth;
+  final myController = TextEditingController();
+  final myController2 = TextEditingController();
   // dropdown menu lists
   List _degreeLevels = [
     "B.A.",
@@ -43,6 +49,7 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     final email = TextFormField(
+      controller: myController,
       keyboardType: TextInputType.emailAddress,
       autofocus: false,
       decoration: InputDecoration(
@@ -94,6 +101,7 @@ class _SignUpState extends State<SignUp> {
     );
 
     final password = TextFormField(
+      controller: myController2,
       autofocus: false,
       obscureText: true,
       decoration: InputDecoration(
@@ -190,16 +198,20 @@ class _SignUpState extends State<SignUp> {
 //    RegExp regex = new RegExp(pattern);
 //    if (!regex.hasMatch(value))
 //      return 'Enter Valid Email';
-    if(!value.endsWith("@my.uwi.edu") && !value.endsWith("@sta.uwi.edu"))
+    if(!value.endsWith("@my.uwi.edu") && !value.endsWith("@sta.uwi.edu")) {
+      print('Enter Valid UWI Email');
       return 'Enter Valid UWI Email';
-    else
+    }
+    else{
       return null;
+    }
   } // validateEmail
 
   void _validateInputs() {
     if (_formKey.currentState.validate()) {
 //    If all data are correct then save data to out variables
       _formKey.currentState.save();
+      handleCreateUser(myController.text, myController2.text);
     } else {
 //    If all data are not valid then start auto validation.
       setState(() {
