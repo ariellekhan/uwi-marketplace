@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Github\\uwi-marketplace\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-en-rAU\\values-en-rAU.xml",
+            "outputFile": "C:\\Users\\phire\\AndroidStudioProjects\\uwi-marketplace\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-en-rAU\\values-en-rAU.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\rahul\\.gradle\\caches\\transforms-1\\files-1.1\\core-1.0.0-rc01.aar\\54083652f77b9e983c3ed27ec3aa3f71\\res\\values-en-rAU\\values-en-rAU.xml",
+                    "source": "C:\\Users\\phire\\.gradle\\caches\\transforms-1\\files-1.1\\core-1.0.0-rc01.aar\\a50d0e4cf5b291509686a275f8a32666\\res\\values-en-rAU\\values-en-rAU.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

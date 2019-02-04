@@ -1,44 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Github\\uwi-marketplace\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sq\\values-sq.xml",
+            "outputFile": "C:\\Users\\phire\\AndroidStudioProjects\\uwi-marketplace\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sq\\values-sq.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\rahul\\.gradle\\caches\\transforms-1\\files-1.1\\core-1.0.0-rc01.aar\\54083652f77b9e983c3ed27ec3aa3f71\\res\\values-sq\\values-sq.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
-                    },
-                    "to": {
-                        "startLines": "21",
-                        "startColumns": "4",
-                        "startOffsets": "3049",
-                        "endColumns": "100",
-                        "endOffsets": "3145"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\rahul\\.gradle\\caches\\transforms-1\\files-1.1\\jetified-play-services-basement-16.1.0.aar\\29730c7730aa01b39aa4845e9fed8dd1\\res\\values-sq\\values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "247",
-                        "endColumns": "187",
-                        "endOffsets": "434"
-                    },
-                    "to": {
-                        "startLines": "10",
-                        "startColumns": "4",
-                        "startOffsets": "1324",
-                        "endColumns": "187",
-                        "endOffsets": "1507"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\rahul\\.gradle\\caches\\transforms-1\\files-1.1\\jetified-play-services-gcm-16.0.0.aar\\fbf1fe992454332bf25a26f1f867d617\\res\\values-sq\\values.xml",
+                    "source": "C:\\Users\\phire\\.gradle\\caches\\transforms-1\\files-1.1\\jetified-play-services-gcm-16.0.0.aar\\d171b5f59d64023565137d25bab34cd4\\res\\values-sq\\values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -55,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\rahul\\.gradle\\caches\\transforms-1\\files-1.1\\jetified-play-services-base-16.0.1.aar\\957a01bfc4938b13ef9120f78ac37dbb\\res\\values-sq\\values.xml",
+                    "source": "C:\\Users\\phire\\.gradle\\caches\\transforms-1\\files-1.1\\jetified-play-services-base-16.0.1.aar\\4dc7ec3027a4aa9b70c901ec273bdac2\\res\\values-sq\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
@@ -69,6 +35,40 @@
                         "startOffsets": "105,214,419,558,667,887,1023,1179,1512,1741,1851,2057,2197,2425,2639,2734,2831",
                         "endColumns": "108,204,138,108,219,135,155,144,228,109,205,139,227,213,94,96,110",
                         "endOffsets": "209,414,553,662,882,1018,1174,1319,1736,1846,2052,2192,2420,2634,2729,2826,2937"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\phire\\.gradle\\caches\\transforms-1\\files-1.1\\jetified-play-services-basement-16.1.0.aar\\449bc92259e43e68b07172ae9982ca09\\res\\values-sq\\values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "247",
+                        "endColumns": "187",
+                        "endOffsets": "434"
+                    },
+                    "to": {
+                        "startLines": "10",
+                        "startColumns": "4",
+                        "startOffsets": "1324",
+                        "endColumns": "187",
+                        "endOffsets": "1507"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\phire\\.gradle\\caches\\transforms-1\\files-1.1\\core-1.0.0-rc01.aar\\a50d0e4cf5b291509686a275f8a32666\\res\\values-sq\\values-sq.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "21",
+                        "startColumns": "4",
+                        "startOffsets": "3049",
+                        "endColumns": "100",
+                        "endOffsets": "3145"
                     }
                 }
             ]

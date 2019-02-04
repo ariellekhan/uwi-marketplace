@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Github\\uwi-marketplace\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-watch-v20\\values-watch-v20.xml",
+            "outputFile": "C:\\Users\\phire\\AndroidStudioProjects\\uwi-marketplace\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-watch-v20\\values-watch-v20.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\rahul\\.gradle\\caches\\transforms-1\\files-1.1\\jetified-play-services-auth-16.0.1.aar\\a2dc08e43a8c063375591c92d925bfd9\\res\\values-watch-v20\\values.xml",
+                    "source": "C:\\Users\\phire\\.gradle\\caches\\transforms-1\\files-1.1\\jetified-play-services-auth-16.0.1.aar\\bc9b0b0852eb3518fe9f9f36fb850ab4\\res\\values-watch-v20\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11",
                         "startColumns": "0,0,0,0,0,0,0,0",
