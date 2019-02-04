@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'signup.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import '../authentication.dart';
 
 class LoginPage extends StatefulWidget {
   static String tag = 'login-page';
@@ -10,6 +12,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final emailController = TextEditingController(text:"");
+  final passwordController = TextEditingController(text:"");
   @override
   Widget build(BuildContext context) {
     final logo = Hero(
@@ -22,9 +26,9 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     final email = TextFormField(
+      controller: emailController,
       keyboardType: TextInputType.emailAddress,
       autofocus: false,
-      initialValue: 'example@email.com',
       decoration: InputDecoration(
         hintText: 'Email',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
@@ -33,8 +37,8 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     final password = TextFormField(
+      controller: passwordController,
       autofocus: false,
-      initialValue: 'some password',
       obscureText: true,
       decoration: InputDecoration(
         hintText: 'Password',
@@ -51,6 +55,7 @@ class _LoginPageState extends State<LoginPage> {
         ),
         onPressed: () {
           // ADD LOGIC
+          signIn();
         },
         padding: EdgeInsets.all(12),
         color: Colors.lightBlueAccent,
@@ -111,5 +116,9 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
 
+  }
+
+  void signIn(){
+    handleSignIn(emailController.text, passwordController.text);
   }
 }
