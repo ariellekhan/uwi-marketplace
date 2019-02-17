@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import '../authentication.dart';
 
 class SignUp extends StatefulWidget {
@@ -128,6 +128,7 @@ class _SignUpState extends State<SignUp> {
         color: Colors.lightBlueAccent,
         child: Text('Sign Up!', style: TextStyle(color: Colors.white)),
       ),
+
     );
 
     final heading = Padding(
@@ -212,6 +213,15 @@ class _SignUpState extends State<SignUp> {
 //    If all data are correct then save data to out variables
       _formKey.currentState.save();
       handleCreateUser(myController.text, myController2.text);
+
+      //Add user info to firebase
+      Firestore.instance.collection('users').document(_email).setData(
+          { 'name': _name,
+            'email': _email,
+            'phone': _phone,
+            'major': _major
+          });
+      Navigator.of(context).pushNamed(LoginPage.tag);
     } else {
 //    If all data are not valid then start auto validation.
       setState(() {
@@ -221,3 +231,4 @@ class _SignUpState extends State<SignUp> {
   } // _validateInputs
 
 }
+
