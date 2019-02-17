@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\P4\\VRamloganAsg2\\uwi-marketplace\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-b+sr+Latn\\values-b+sr+Latn.xml",
+            "outputFile": "C:\\Users\\phire\\AndroidStudioProjects\\uwi-marketplace\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-b+sr+Latn\\values-b+sr+Latn.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Vinash\\.gradle\\caches\\transforms-1\\files-1.1\\jetified-play-services-gcm-16.0.0.aar\\af06c11393be9907d7fb639c42129e53\\res\\values-b+sr+Latn\\values.xml",
+                    "source": "C:\\Users\\phire\\.gradle\\caches\\transforms-1\\files-1.1\\jetified-play-services-gcm-16.0.0.aar\\d171b5f59d64023565137d25bab34cd4\\res\\values-b+sr+Latn\\values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Vinash\\.gradle\\caches\\transforms-1\\files-1.1\\core-1.0.0-rc01.aar\\868c6024c03d07a616eb6b69211da563\\res\\values-b+sr+Latn\\values-b+sr+Latn.xml",
+                    "source": "C:\\Users\\phire\\.gradle\\caches\\transforms-1\\files-1.1\\core-1.0.0-rc01.aar\\a50d0e4cf5b291509686a275f8a32666\\res\\values-b+sr+Latn\\values-b+sr+Latn.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -38,7 +38,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Vinash\\.gradle\\caches\\transforms-1\\files-1.1\\jetified-play-services-basement-16.1.0.aar\\9b0109cf6dd097a1f969a77ae2547b25\\res\\values-b+sr+Latn\\values.xml",
+                    "source": "C:\\Users\\phire\\.gradle\\caches\\transforms-1\\files-1.1\\jetified-play-services-basement-16.1.0.aar\\449bc92259e43e68b07172ae9982ca09\\res\\values-b+sr+Latn\\values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -55,7 +55,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\Vinash\\.gradle\\caches\\transforms-1\\files-1.1\\jetified-play-services-base-16.0.1.aar\\6e6e0c2804de007ede5102895b947d74\\res\\values-b+sr+Latn\\values.xml",
+                    "source": "C:\\Users\\phire\\.gradle\\caches\\transforms-1\\files-1.1\\jetified-play-services-base-16.0.1.aar\\4dc7ec3027a4aa9b70c901ec273bdac2\\res\\values-b+sr+Latn\\values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",

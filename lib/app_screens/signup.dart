@@ -128,7 +128,6 @@ class _SignUpState extends State<SignUp> {
         color: Colors.lightBlueAccent,
         child: Text('Sign Up!', style: TextStyle(color: Colors.white)),
       ),
-
     );
 
     final heading = Padding(
@@ -199,14 +198,19 @@ class _SignUpState extends State<SignUp> {
 //    RegExp regex = new RegExp(pattern);
 //    if (!regex.hasMatch(value))
 //      return 'Enter Valid Email';
-    if(!value.endsWith("@my.uwi.edu") && !value.endsWith("@sta.uwi.edu")) {
+    if (!value.endsWith("@my.uwi.edu") && !value.endsWith("@sta.uwi.edu")) {
       print('Enter Valid UWI Email');
       return 'Enter Valid UWI Email';
-    }
-    else{
+    } else {
       return null;
     }
   } // validateEmail
+
+  //adds items collection to firebase
+  void addToDatabase() {
+    Firestore.instance.collection('users').document(_email).setData(
+        {'name': _name, 'email': _email, 'phone': _phone, 'major': _major});
+  }
 
   void _validateInputs() {
     if (_formKey.currentState.validate()) {
@@ -215,12 +219,7 @@ class _SignUpState extends State<SignUp> {
       handleCreateUser(myController.text, myController2.text);
 
       //Add user info to firebase
-      Firestore.instance.collection('users').document(_email).setData(
-          { 'name': _name,
-            'email': _email,
-            'phone': _phone,
-            'major': _major
-          });
+      addToDatabase();
       Navigator.of(context).pushNamed(LoginPage.tag);
     } else {
 //    If all data are not valid then start auto validation.
@@ -231,4 +230,3 @@ class _SignUpState extends State<SignUp> {
   } // _validateInputs
 
 }
-

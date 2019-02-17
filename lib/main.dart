@@ -7,7 +7,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
-import './app_screens/home.dart';
 import './app_screens/login.dart';
 import './app_screens/signup.dart';
 import 'tabs_page.dart';
