@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\P4\\VRamloganAsg2\\uwi-marketplace\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
+            "outputFile": "C:\\Users\\phire\\AndroidStudioProjects\\uwi-marketplace\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v24\\values-v24.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Vinash\\.gradle\\caches\\transforms-1\\files-1.1\\media-1.0.0-rc01.aar\\5c9ee03759a211573b3d97f71f116ecd\\res\\values-v24\\values-v24.xml",
+                    "source": "C:\\Users\\phire\\.gradle\\caches\\transforms-1\\files-1.1\\media-1.0.0-rc01.aar\\4100c5aa44e1a6fd8c9167d3988677a6\\res\\values-v24\\values-v24.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",

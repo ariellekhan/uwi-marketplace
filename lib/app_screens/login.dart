@@ -2,8 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'signup.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import '../authentication.dart';
+import 'add_items.dart';
+
 
 class LoginPage extends StatefulWidget {
   static String tag = 'login-page';
@@ -54,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
           borderRadius: BorderRadius.circular(24),
         ),
         onPressed: () {
-          // ADD LOGIC
+          // ADD LOGIC - change
           signIn();
         },
         padding: EdgeInsets.all(12),
@@ -70,6 +71,10 @@ class _LoginPageState extends State<LoginPage> {
       ),
       onPressed: () {
         // ADD LOGIC
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ItemForm()),
+        );
       }
     );
 

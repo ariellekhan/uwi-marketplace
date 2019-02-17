@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ItemForm extends StatefulWidget {
   static String tag = 'item-form';
@@ -7,7 +8,7 @@ class ItemForm extends StatefulWidget {
   _ItemFormState createState() => new _ItemFormState();
 }
 
-class _ItemFormState extends State<ItemForm>{
+class _ItemFormState extends State<ItemForm> {
   var _itemTypes = [
     "Type of Item",
     "Text Book",
@@ -18,8 +19,6 @@ class _ItemFormState extends State<ItemForm>{
     "Miscellaneous"
   ];
 
-
-
   bool _visible = false;
   bool _visible2 = false;
 
@@ -28,11 +27,11 @@ class _ItemFormState extends State<ItemForm>{
   var _currentItemSelected = "Type of Item";
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  String _desc = '';
+  bool _autoValidate = false;
+  String _desc;
   String _items = '';
   String _author = '';
-  String _name = '';
+  String _name;
   String _price = '';
   String _degree = '';
   String _address = '';
@@ -46,11 +45,9 @@ class _ItemFormState extends State<ItemForm>{
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
       ),
-      onSaved: (String val)
-      {
+      onSaved: (String val) {
         _desc = val;
       },
-
     );
 
     final items = TextFormField(
@@ -60,11 +57,9 @@ class _ItemFormState extends State<ItemForm>{
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
       ),
-      onSaved: (String val)
-      {
+      onSaved: (String val) {
         _items = val;
       },
-
     );
 
     final name = TextFormField(
@@ -74,11 +69,9 @@ class _ItemFormState extends State<ItemForm>{
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
       ),
-      onSaved: (String val)
-      {
+      onSaved: (String val) {
         _name = val;
       },
-
     );
 
     final degree = TextFormField(
@@ -88,11 +81,9 @@ class _ItemFormState extends State<ItemForm>{
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
       ),
-      onSaved: (String val)
-      {
+      onSaved: (String val) {
         _degree = val;
       },
-
     );
 
     final price = TextFormField(
@@ -104,13 +95,9 @@ class _ItemFormState extends State<ItemForm>{
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
       ),
-
-
-      onSaved: (String val)
-      {
+      onSaved: (String val) {
         _price = val;
       },
-
     );
 
     final author = TextFormField(
@@ -120,11 +107,9 @@ class _ItemFormState extends State<ItemForm>{
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
       ),
-      onSaved: (String val)
-      {
+      onSaved: (String val) {
         _author = val;
       },
-
     );
 
     final address = TextFormField(
@@ -134,11 +119,9 @@ class _ItemFormState extends State<ItemForm>{
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
       ),
-      onSaved: (String val)
-      {
+      onSaved: (String val) {
         _address = val;
       },
-
     );
 
     final heading = Padding(
@@ -150,24 +133,18 @@ class _ItemFormState extends State<ItemForm>{
     );
 
     final dropButton = DropdownButton<String>(
-
-
       items: _itemTypes.map((String dropDownStringItem) {
         return DropdownMenuItem<String>(
           value: dropDownStringItem,
           child: Text(dropDownStringItem),
         );
       }).toList(),
-
       onChanged: (String newValueSelected) {
+        _items = newValueSelected;
         // Your code to execute, when a menu item is selected from drop down
         _onDropDownItemSelected(newValueSelected);
       },
-
       value: _currentItemSelected,
-
-
-
     );
 
     final uploadBtn = Padding(
@@ -183,17 +160,21 @@ class _ItemFormState extends State<ItemForm>{
     );
 
     final submitBtn = Padding(
-      padding: EdgeInsets.symmetric(vertical: 16.0,),
+      padding: EdgeInsets.symmetric(
+        vertical: 16.0,
+      ),
       child: RaisedButton(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
         ),
         padding: EdgeInsets.all(12),
+        onPressed: () {
+          _validateInputs();
+        },
         color: Colors.lightBlueAccent,
         child: Text('Submit', style: TextStyle(color: Colors.white)),
       ),
     );
-
 
     return Form(
       key: _formKey,
@@ -210,20 +191,14 @@ class _ItemFormState extends State<ItemForm>{
             padding: EdgeInsets.only(left: 24.0, right: 24.0),
             children: <Widget>[
               heading,
-
               SizedBox(height: 8.0),
               dropButton,
-
               AnimatedOpacity(
                 opacity: _visible ? 1.0 : 0.0,
                 duration: Duration(milliseconds: 500),
                 //SizedBox(height: 8.0),
-                child:
-                author,
-
+                child: author,
               ),
-
-
               SizedBox(height: 8.0),
               name,
               SizedBox(height: 8.0),
@@ -235,24 +210,17 @@ class _ItemFormState extends State<ItemForm>{
                 opacity: _visible ? 1.0 : 0.0,
                 duration: Duration(milliseconds: 500),
                 //SizedBox(height: 8.0),
-                child:
-                degree,
-
+                child: degree,
               ),
               SizedBox(height: 8.0),
               AnimatedOpacity(
                 opacity: _visible2 ? 1.0 : 0.0,
                 duration: Duration(milliseconds: 500),
                 //SizedBox(height: 8.0),
-                child:
-                address,
-
+                child: address,
               ),
               uploadBtn,
               submitBtn,
-
-
-
             ],
           ),
         ),
@@ -263,16 +231,47 @@ class _ItemFormState extends State<ItemForm>{
   void _onDropDownItemSelected(String newValueSelected) {
     setState(() {
       this._currentItemSelected = newValueSelected;
-      if (_currentItemSelected == "Text Book"){
-        _visible = true; } else
-
+      if (_currentItemSelected == "Text Book") {
+        _visible = true;
+      } else
         _visible = false;
 
-      if (_currentItemSelected == "Dorm"){
-        _visible2 = true; } else
-
+      if (_currentItemSelected == "Dorm") {
+        _visible2 = true;
+      } else
         _visible2 = false;
-
     });
   }
+
+  //adds items collection to firebase
+  void addToDatabase() {
+    Firestore.instance
+        .collection('items')
+        .document("addItems")
+        .collection(_items)
+        .document()
+        .setData({
+      'name': _name,
+      'description': _desc,
+      'author': _author,
+      'price': _price,
+      'degree': _degree,
+      'address': _address,
+    });
+  }
+
+  void _validateInputs() {
+    if (_formKey.currentState.validate()) {
+//    If all data are correct then save data to out variables
+      _formKey.currentState.save();
+
+      //Add user info to firebase
+      addToDatabase();
+    } else {
+//    If all data are not valid then start auto validation.
+      setState(() {
+        _autoValidate = true;
+      });
+    }
+  } // _validateInputs
 }
