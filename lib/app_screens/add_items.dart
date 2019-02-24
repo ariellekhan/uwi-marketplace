@@ -1,5 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import "package:image_picker/image_picker.dart";
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:random_string/random_string.dart' as random;
 
 class ItemForm extends StatefulWidget {
   static String tag = 'item-form';
@@ -35,6 +40,7 @@ class _ItemFormState extends State<ItemForm> {
   String _price = '';
   String _degree = '';
   String _address = '';
+  File itemImage;
 
   @override
   Widget build(BuildContext context) {
@@ -156,6 +162,7 @@ class _ItemFormState extends State<ItemForm> {
         padding: EdgeInsets.all(12),
         color: Colors.lightBlueAccent,
         child: Text('Upload Image', style: TextStyle(color: Colors.white)),
+        onPressed: getImage,
       ),
     );
 
@@ -219,6 +226,7 @@ class _ItemFormState extends State<ItemForm> {
                 //SizedBox(height: 8.0),
                 child: address,
               ),
+              itemImage ==null? placeholderImage(): uploadedImage(),
               uploadBtn,
               submitBtn,
             ],
@@ -245,6 +253,13 @@ class _ItemFormState extends State<ItemForm> {
 
   //adds items collection to firebase
   void addToDatabase() {
+    //add image to firebase
+    String imageName = "";
+    if(itemImage != null){
+      imageName = random.randomString(10);
+      addImageToFirebase(imageName , itemImage);
+    }
+
     Firestore.instance
         .collection('items')
         .document("addItems")
@@ -257,7 +272,9 @@ class _ItemFormState extends State<ItemForm> {
       'price': _price,
       'degree': _degree,
       'address': _address,
+      'image': imageName,
     });
+
   }
 
   void _validateInputs() {
@@ -274,4 +291,42 @@ class _ItemFormState extends State<ItemForm> {
       });
     }
   } // _validateInputs
+
+  //gets image from device
+  Future getImage() async{
+    var deviceImage = await ImagePicker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      itemImage = deviceImage;
+    });
+  }
+
+
+  Widget uploadedImage(){
+    return Container(
+        child: Column(
+            children: <Widget>[
+              Image.file(itemImage,height: 100.0, width: 100.0),
+            ]
+        )
+    );
+  }
+
+  Widget placeholderImage(){
+    return Container(
+        child: Column(
+            children: <Widget>[
+          Image.asset(
+        'images/placeholder.png',
+          height: 100.0, width: 100.0,
+        )
+            ]
+        )
+    );
+  }
+
+  void addImageToFirebase(String imageName, File file){
+    final StorageReference fiebaseStorageRef = FirebaseStorage.instance.ref().child("itemImages/" +imageName);
+    final StorageUploadTask task = fiebaseStorageRef.putFile(file);
+  }
 }
