@@ -76,7 +76,24 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\phire\\.gradle\\caches\\transforms-1\\files-1.1\\coordinatorlayout-1.0.0-rc01.aar\\a9c837e6097617bfecbb5ff43e894135\\res\\values\\values.xml",
+                    "source": "C:\\Users\\phire\\.gradle\\caches\\transforms-1\\files-1.1\\jetified-play-services-gcm-16.0.0.aar\\d171b5f59d64023565137d25bab34cd4\\res\\values\\values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "161",
+                        "endColumns": "77",
+                        "endOffsets": "238"
+                    },
+                    "to": {
+                        "startLines": "335",
+                        "startColumns": "4",
+                        "startOffsets": "20324",
+                        "endColumns": "81",
+                        "endOffsets": "20401"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\phire\\.gradle\\caches\\transforms-1\\files-1.1\\coordinatorlayout-1.0.0.aar\\90811f77c24dae7040dd20fc5be87731\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,3,13,102",
                         "startColumns": "4,4,4,4",
@@ -95,7 +112,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\phire\\.gradle\\caches\\transforms-1\\files-1.1\\core-1.0.0-rc01.aar\\a50d0e4cf5b291509686a275f8a32666\\res\\values\\values.xml",
+                    "source": "C:\\Users\\phire\\.gradle\\caches\\transforms-1\\files-1.1\\core-1.0.0.aar\\40923b582b91452afdf45ffc49de6bf5\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,13,56,88,125,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,171,172,176,177,178",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -114,24 +131,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\phire\\.gradle\\caches\\transforms-1\\files-1.1\\jetified-play-services-gcm-16.0.0.aar\\d171b5f59d64023565137d25bab34cd4\\res\\values\\values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "161",
-                        "endColumns": "77",
-                        "endOffsets": "238"
-                    },
-                    "to": {
-                        "startLines": "335",
-                        "startColumns": "4",
-                        "startOffsets": "20324",
-                        "endColumns": "81",
-                        "endOffsets": "20401"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\phire\\.gradle\\caches\\transforms-1\\files-1.1\\media-1.0.0-rc01.aar\\4100c5aa44e1a6fd8c9167d3988677a6\\res\\values\\values.xml",
+                    "source": "C:\\Users\\phire\\.gradle\\caches\\transforms-1\\files-1.1\\media-1.0.0.aar\\370644091a7dd0d75d53decb3d9b75ae\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
