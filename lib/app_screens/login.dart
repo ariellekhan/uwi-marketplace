@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'signup.dart';
 import '../authentication.dart';
 import 'add_items.dart';
+import 'nav_bar.dart';
 
 
 class LoginPage extends StatefulWidget {
@@ -56,7 +57,11 @@ class _LoginPageState extends State<LoginPage> {
         ),
         onPressed: () {
           // ADD LOGIC - change
-          signIn();
+          // Navigator.of(context).pushNamed(Categories.tag);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => NavBar()),
+          );
         },
         padding: EdgeInsets.all(12),
         color: Colors.lightBlueAccent,

@@ -1,45 +1,24 @@
 import 'package:flutter/material.dart';
+import 'add_items.dart';
+import 'login.dart';
+import 'signup.dart';
 
 class Categories extends StatefulWidget {
-  static String tag = 'login-page';
+  static String tag = 'categories';
 
   @override
   _CategoriesState createState() => new _CategoriesState();
 }
 
 class _CategoriesState extends State<Categories> {
+
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
       title: Text("Categories"),
-      backgroundColor: Colors.lightBlueAccent,
+      backgroundColor: Colors.purple,
     ),
-    bottomNavigationBar: BottomNavigationBar(
-      currentIndex: 0, // this will be set when a new tab is tapped
-      fixedColor: Colors.deepPurple,
-      items: [
-        BottomNavigationBarItem(
-          icon: new Icon(Icons.home),
-          title: new Text('Home'),
-        ),
-        BottomNavigationBarItem(
-          icon: new Icon(Icons.mail),
-          title: new Text('Messages'),
-        ),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            title: Text('Profile')
-        ),
-//            BottomNavigationBarItem(
-//                icon: Icon(Icons.person),
-//                title: Text('Profile')
-//            ),
-//            BottomNavigationBarItem(
-//                icon: Icon(Icons.person),
-//                title: Text('Profile')
-//            ),
-      ],
-    ),
+
 
     body: ListView(
       //mainAxisAlignment: MainAxisAlignment.center,
