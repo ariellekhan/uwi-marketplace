@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../authentication.dart';
 
 class Home extends StatefulWidget{
 
@@ -7,6 +8,7 @@ class Home extends StatefulWidget{
 }
 
 class _HomeState extends State<Home> {
+  String email = getUser().email; //temporary code - can be deleted
   @override
   Widget build(BuildContext context) =>
       Scaffold(
@@ -15,7 +17,7 @@ class _HomeState extends State<Home> {
           backgroundColor: Colors.pink,
         ),
 
-        body: Text("Welcome"),
+        body: Text("Welcome $email"),
       );
 
 }

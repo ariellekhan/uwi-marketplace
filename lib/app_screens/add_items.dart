@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import "package:image_picker/image_picker.dart";
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:random_string/random_string.dart' as random;
+import '../authentication.dart';
 
 class ItemForm extends StatefulWidget {
   static String tag = 'item-form';
@@ -263,6 +264,22 @@ class _ItemFormState extends State<ItemForm> {
     Firestore.instance
         .collection('items')
         .document("addItems")
+        .collection(_items)
+        .document()
+        .setData({
+      'name': _name,
+      'description': _desc,
+      'author': _author,
+      'price': _price,
+      'degree': _degree,
+      'address': _address,
+      'image': imageName,
+    });
+
+    //adds to user items
+    Firestore.instance
+        .collection('userItems')
+        .document(getUser().uid)
         .collection(_items)
         .document()
         .setData({

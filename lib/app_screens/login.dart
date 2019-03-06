@@ -5,7 +5,7 @@ import 'signup.dart';
 import '../authentication.dart';
 import 'add_items.dart';
 import 'nav_bar.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginPage extends StatefulWidget {
   static String tag = 'login-page';
@@ -26,7 +26,6 @@ class _LoginPageState extends State<LoginPage> {
         child: Image.asset('images/logo.png'),
       ),
     );
-
     final email = TextFormField(
       controller: emailController,
       keyboardType: TextInputType.emailAddress,
@@ -58,10 +57,9 @@ class _LoginPageState extends State<LoginPage> {
         onPressed: () {
           // ADD LOGIC - change
           // Navigator.of(context).pushNamed(Categories.tag);
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => NavBar()),
-          );
+
+        signIn();
+
         },
         padding: EdgeInsets.all(12),
         color: Colors.lightBlueAccent,
@@ -76,10 +74,7 @@ class _LoginPageState extends State<LoginPage> {
       ),
       onPressed: () {
         // ADD LOGIC
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => ItemForm()),
-        );
+
       }
     );
 
@@ -128,7 +123,22 @@ class _LoginPageState extends State<LoginPage> {
 
   }
 
-  void signIn(){
-    handleSignIn(emailController.text, passwordController.text);
+  void signIn() async {
+    try{
+      FirebaseUser user = await FirebaseAuth.instance.signInWithEmailAndPassword(email: emailController.text, password: passwordController.text);
+      setUser(user);
+      print('Signed in ${user.email}');
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => NavBar()),
+      );
+    }
+    catch(e){
+      print('error: $e');
+      setUser(null);
+    }
   }
+
+
+
 }
