@@ -63,10 +63,11 @@ class _SignUpState extends State<SignUp> {
       },
     );
 
+
     final name = TextFormField(
       autofocus: false,
       decoration: InputDecoration(
-        hintText: 'Name',
+        hintText: "Name",
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
       ),
