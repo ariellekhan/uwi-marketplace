@@ -7,6 +7,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import './app_screens/login.dart';
 import './app_screens/signup.dart';
+import './app_screens/profile.dart';
 
 
 
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       navigatorObservers: <NavigatorObserver>[observer],
-      home: LoginPage(),
+      home: Profile(),
       routes: routes,
     );
   }

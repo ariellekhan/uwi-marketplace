@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'login.dart';
+import 'my_items.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -60,6 +61,26 @@ class _ProfileState extends State<Profile> {
       ),
     );
 
+    final listedItemsButton = Padding(
+      padding: EdgeInsets.symmetric(vertical: 16.0),
+      child: RaisedButton(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(50),
+        ),
+        onPressed: () {
+          // ADD LOGIC - change
+          // Navigator.of(context).pushNamed(Categories.tag);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => MyItems()), // CHANGE
+          );
+        },
+        padding: EdgeInsets.all(12),
+        color: Colors.blue,
+        child: Text('My Items', style: TextStyle(color: Colors.white)),
+      ),
+    );
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Profile"),
@@ -81,6 +102,7 @@ class _ProfileState extends State<Profile> {
             degree,
             SizedBox(height: 24.0),
             logoutButton,
+            listedItemsButton,
           ],
         ),
       ),
