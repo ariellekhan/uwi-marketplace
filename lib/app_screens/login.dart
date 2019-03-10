@@ -136,7 +136,22 @@ class _LoginPageState extends State<LoginPage> {
     catch(e){
       print('error: $e');
       setUser(null);
+      _showAlert();
     }
+  }
+
+  void _showAlert(){
+    showDialog(context: context,
+        builder: (BuildContext context){
+          return AlertDialog(
+            title: new Text("Incorrect username / password"),
+            content: new Text("The username or password entered is invalid."),
+            actions: <Widget>[
+              new FlatButton(onPressed: (){Navigator.of(context).pop();}, child: new Text("Try again"))
+            ]
+          );
+        }
+    );
   }
 
 

@@ -6,6 +6,7 @@ import "package:image_picker/image_picker.dart";
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:random_string/random_string.dart' as random;
 import '../authentication.dart';
+import 'nav_bar.dart';
 
 class ItemForm extends StatefulWidget {
   static String tag = 'item-form';
@@ -41,8 +42,8 @@ class _ItemFormState extends State<ItemForm> {
   String _price = '';
   String _degree = '';
   String _address = '';
-  File itemImage;
-
+  File _itemImage;
+  String _imageUrl;
   @override
   Widget build(BuildContext context) {
     final desc = TextFormField(
@@ -178,6 +179,12 @@ class _ItemFormState extends State<ItemForm> {
         padding: EdgeInsets.all(12),
         onPressed: () {
           _validateInputs();
+          _uploadToFirestore().then((_) {
+            _showAlert("Success", "Item was uploaded");
+            _itemImage = null;
+          }).catchError((e) {
+            _showAlert("Failed", "Item was not uploaded");
+          });
         },
         color: Colors.lightBlueAccent,
         child: Text('Submit', style: TextStyle(color: Colors.white)),
@@ -227,7 +234,7 @@ class _ItemFormState extends State<ItemForm> {
                 //SizedBox(height: 8.0),
                 child: address,
               ),
-              itemImage ==null? placeholderImage(): uploadedImage(),
+              _itemImage == null ? placeholderImage() : uploadedImage(),
               uploadBtn,
               submitBtn,
             ],
@@ -254,13 +261,6 @@ class _ItemFormState extends State<ItemForm> {
 
   //adds items collection to firebase
   void addToDatabase() {
-    //add image to firebase
-    String imageName = "";
-    if(itemImage != null){
-      imageName = random.randomString(10);
-      addImageToFirebase(imageName , itemImage);
-    }
-
     Firestore.instance
         .collection('items')
         .document("addItems")
@@ -273,7 +273,7 @@ class _ItemFormState extends State<ItemForm> {
       'price': _price,
       'degree': _degree,
       'address': _address,
-      'image': imageName,
+      'image': _imageUrl,
     });
 
     //adds to user items
@@ -289,9 +289,8 @@ class _ItemFormState extends State<ItemForm> {
       'price': _price,
       'degree': _degree,
       'address': _address,
-      'image': imageName,
+      'image': _imageUrl,
     });
-
   }
 
   void _validateInputs() {
@@ -300,7 +299,7 @@ class _ItemFormState extends State<ItemForm> {
       _formKey.currentState.save();
 
       //Add user info to firebase
-      addToDatabase();
+      //addToDatabase();
     } else {
 //    If all data are not valid then start auto validation.
       setState(() {
@@ -310,40 +309,73 @@ class _ItemFormState extends State<ItemForm> {
   } // _validateInputs
 
   //gets image from device
-  Future getImage() async{
+  Future getImage() async {
     var deviceImage = await ImagePicker.pickImage(source: ImageSource.gallery);
 
     setState(() {
-      itemImage = deviceImage;
+      _itemImage = deviceImage;
     });
   }
 
-
-  Widget uploadedImage(){
+  Widget uploadedImage() {
     return Container(
-        child: Column(
-            children: <Widget>[
-              Image.file(itemImage,height: 100.0, width: 100.0),
-            ]
-        )
-    );
+        child: Column(children: <Widget>[
+      Image.file(_itemImage, height: 100.0, width: 100.0),
+    ]));
   }
 
-  Widget placeholderImage(){
+  Widget placeholderImage() {
     return Container(
-        child: Column(
-            children: <Widget>[
-          Image.asset(
+        child: Column(children: <Widget>[
+      Image.asset(
         'images/placeholder.png',
-          height: 100.0, width: 100.0,
-        )
-            ]
-        )
-    );
+        height: 100.0,
+        width: 100.0,
+      )
+    ]));
   }
 
-  void addImageToFirebase(String imageName, File file){
-    final StorageReference fiebaseStorageRef = FirebaseStorage.instance.ref().child("itemImages/" +imageName);
-    final StorageUploadTask task = fiebaseStorageRef.putFile(file);
+//returns the downloaded url
+  Future addImageToFirebase(String imageName, File file) async {
+    final StorageReference firebaseStorageRef =
+        FirebaseStorage.instance.ref().child("itemImages/" + imageName);
+    final StorageUploadTask task = firebaseStorageRef.putFile(file);
+    var downUrl = await (await task.onComplete).ref.getDownloadURL();
+    _imageUrl = downUrl;
+  }
+
+  void _showAlert(String _t, String _c) {
+    _itemImage = null;
+    _imageUrl = "";
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: new Text(_t),
+            content: new Text(_c),
+            actions: <Widget>[
+              new FlatButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => new NavBar()),
+                  );
+                },
+                child: new Text("close"),
+              )
+            ],
+          );
+        });
+  }
+
+  Future _uploadToFirestore() async {
+    if (_itemImage != null) {
+      addImageToFirebase(random.randomString(10), _itemImage).then((_) {
+        addToDatabase();
+      }).catchError((e) {});
+    } else {
+      _imageUrl = "";
+      addToDatabase();
+    }
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'add_items.dart';
 import 'login.dart';
 import 'signup.dart';
+import 'items_list.dart';
 
 class Categories extends StatefulWidget {
   static String tag = 'categories';
@@ -29,7 +30,13 @@ class _CategoriesState extends State<Categories> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: RaisedButton(
-                onPressed: () => {},
+                onPressed: () {
+                  // ADD LOGIC
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => new AllItems(value: 'Text Book')),
+                  );
+                },
                 color: Colors.green,
                 padding: EdgeInsets.all(60.0),
                 child: Column(
@@ -49,7 +56,13 @@ class _CategoriesState extends State<Categories> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: RaisedButton(
-                onPressed: () => {},
+                onPressed: () {
+                  // ADD LOGIC
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => new AllItems(value: 'Stationery')),
+                  );
+                },
                 color: Colors.orange,
                 padding: EdgeInsets.all(60.0),
                 child: Column(
@@ -74,7 +87,13 @@ class _CategoriesState extends State<Categories> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: RaisedButton(
-                onPressed: () => {},
+                onPressed: () {
+                  // ADD LOGIC
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => new AllItems(value: 'Dorm')),
+                  );
+                },
                 color: Colors.purple,
                 padding: EdgeInsets.all(60.0),
                 child: Column(
@@ -94,7 +113,13 @@ class _CategoriesState extends State<Categories> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: RaisedButton(
-                onPressed: () => {},
+                onPressed: () {
+                  // ADD LOGIC
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => new AllItems(value: 'Electronics')),
+                  );
+                },
                 color: Colors.yellow,
                 padding: EdgeInsets.all(60.0),
                 child: Column(
@@ -118,7 +143,13 @@ class _CategoriesState extends State<Categories> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: RaisedButton(
-                onPressed: () => {},
+                onPressed: () {
+                  // ADD LOGIC
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => new AllItems(value: 'Special Equipment')),
+                  );
+                },
                 color: Colors.blue,
                 padding: EdgeInsets.all(60.0),
                 child: Column(
@@ -138,7 +169,13 @@ class _CategoriesState extends State<Categories> {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: RaisedButton(
-                onPressed: () => {},
+                onPressed: () {
+                  // ADD LOGIC
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => new AllItems(value: 'Miscellaneous')),
+                  );
+                },
                 color: Colors.pink,
                 padding: EdgeInsets.all(60.0),
                 child: Column(
