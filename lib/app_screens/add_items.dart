@@ -26,11 +26,6 @@ class _ItemFormState extends State<ItemForm> {
     "Miscellaneous"
   ];
 
-  bool _visible = false;
-  bool _visible2 = false;
-
-  // Visibility visible;
-
   var _currentItemSelected = "Type of Item";
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -159,10 +154,10 @@ class _ItemFormState extends State<ItemForm> {
       padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 100.0),
       child: RaisedButton(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(0),
         ),
         padding: EdgeInsets.all(12),
-        color: Colors.lightBlueAccent,
+        color: Colors.redAccent,
         child: Text('Upload Image', style: TextStyle(color: Colors.white)),
         onPressed: getImage,
       ),
@@ -191,12 +186,65 @@ class _ItemFormState extends State<ItemForm> {
       ),
     );
 
+    var itemCategoryList;
+    if (_currentItemSelected == "Text Book") {
+      itemCategoryList = ListView(
+        shrinkWrap: true,
+        padding: EdgeInsets.only(left: 24.0, right: 24.0),
+        children: <Widget>[
+          author,
+          SizedBox(height: 8.0),
+          name,
+          SizedBox(height: 8.0),
+          desc,
+          SizedBox(height: 8.0),
+          price,
+          SizedBox(height: 8.0),
+          degree,
+          SizedBox(height: 8.0),
+        ],
+      );
+    } else if (_currentItemSelected == "Stationery" ||
+        _currentItemSelected == "Electronics" ||
+        _currentItemSelected == "Special Equipment" ||
+        _currentItemSelected == "Miscellaneous") {
+      itemCategoryList = ListView(
+        shrinkWrap: true,
+        padding: EdgeInsets.only(left: 24.0, right: 24.0),
+        children: <Widget>[
+          name,
+          SizedBox(height: 8.0),
+          desc,
+          SizedBox(height: 8.0),
+          price,
+          SizedBox(height: 8.0),
+        ],
+      );
+    } else if (_currentItemSelected == "Dorm") {
+      itemCategoryList = ListView(
+        shrinkWrap: true,
+        padding: EdgeInsets.only(left: 24.0, right: 24.0),
+        children: <Widget>[
+          name,
+          SizedBox(height: 8.0),
+          desc,
+          SizedBox(height: 8.0),
+          price,
+          SizedBox(height: 8.0),
+          address,
+          SizedBox(height: 8.0),
+        ],
+      );
+    } else {
+      itemCategoryList = Container();
+    }
+
     return Form(
       key: _formKey,
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text('UWI MARKETPLACE'),
+          title: Text('Add Item'),
           backgroundColor: Colors.lightBlueAccent,
         ),
         body: Padding(
@@ -208,35 +256,16 @@ class _ItemFormState extends State<ItemForm> {
               heading,
               SizedBox(height: 8.0),
               dropButton,
-              AnimatedOpacity(
-                opacity: _visible ? 1.0 : 0.0,
-                duration: Duration(milliseconds: 500),
-                //SizedBox(height: 8.0),
-                child: author,
-              ),
-              SizedBox(height: 8.0),
-              name,
-              SizedBox(height: 8.0),
-              desc,
-              SizedBox(height: 8.0),
-              price,
-              SizedBox(height: 8.0),
-              AnimatedOpacity(
-                opacity: _visible ? 1.0 : 0.0,
-                duration: Duration(milliseconds: 500),
-                //SizedBox(height: 8.0),
-                child: degree,
-              ),
-              SizedBox(height: 8.0),
-              AnimatedOpacity(
-                opacity: _visible2 ? 1.0 : 0.0,
-                duration: Duration(milliseconds: 500),
-                //SizedBox(height: 8.0),
-                child: address,
-              ),
-              _itemImage == null ? placeholderImage() : uploadedImage(),
-              uploadBtn,
-              submitBtn,
+              itemCategoryList,
+              _currentItemSelected != 'Type of Item'
+                  ? (_itemImage == null ? placeholderImage() : uploadedImage())
+                  : (Container()),
+              _currentItemSelected != 'Type of Item'
+                  ? (uploadBtn)
+                  : (Container()),
+              _currentItemSelected != 'Type of Item'
+                  ? (submitBtn)
+                  : (Container()),
             ],
           ),
         ),
@@ -247,40 +276,22 @@ class _ItemFormState extends State<ItemForm> {
   void _onDropDownItemSelected(String newValueSelected) {
     setState(() {
       this._currentItemSelected = newValueSelected;
-      if (_currentItemSelected == "Text Book") {
-        _visible = true;
-      } else
-        _visible = false;
-
-      if (_currentItemSelected == "Dorm") {
-        _visible2 = true;
-      } else
-        _visible2 = false;
     });
   }
 
   //adds items collection to firebase
   void addToDatabase() {
-    Firestore.instance
-        .collection('items')
-        .document("addItems")
-        .collection(_items)
-        .document()
-        .setData({
-      'name': _name,
-      'description': _desc,
-      'author': _author,
-      'price': _price,
-      'degree': _degree,
-      'address': _address,
-      'image': _imageUrl,
-    });
+    firestoreInstance('items', 'addItems', _items);
 
     //adds to user items
+    firestoreInstance('userItems', getUser().uid, _items);
+  }
+
+  void firestoreInstance(String c1, String d1, String c2) {
     Firestore.instance
-        .collection('userItems')
-        .document(getUser().uid)
-        .collection(_items)
+        .collection(c1)
+        .document(d1)
+        .collection(c2)
         .document()
         .setData({
       'name': _name,
@@ -297,9 +308,6 @@ class _ItemFormState extends State<ItemForm> {
     if (_formKey.currentState.validate()) {
 //    If all data are correct then save data to out variables
       _formKey.currentState.save();
-
-      //Add user info to firebase
-      //addToDatabase();
     } else {
 //    If all data are not valid then start auto validation.
       setState(() {

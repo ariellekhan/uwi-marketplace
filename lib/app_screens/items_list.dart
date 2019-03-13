@@ -22,26 +22,31 @@ class _AllItemsState extends State<AllItems>{
         backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
 
         body: new StreamBuilder<QuerySnapshot>(
-          stream: Firestore.instance.collection('items').document('addItems').collection("${widget.value}").snapshots(),
-          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
-            return ListView.builder(
-              scrollDirection: Axis.vertical,
-              itemBuilder: (context, index) => buildItem(context, snapshot.data.documents[index]),
-              itemCount: snapshot.data.documents.length,
+          stream: Firestore.instance.collection('items').document('addItems').collection("${widget.value}").limit(20).snapshots(),
+          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (!snapshot.hasData) {
+              return Center(
+                  child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.red)));
+            }
+            else {
+              return ListView.builder(
+                scrollDirection: Axis.vertical,
+                itemBuilder: (context, index) =>
+                    buildItem(context, snapshot.data.documents[index]),
+                itemCount: snapshot.data.documents.length,
 
-            );
-
+              );
+            }
           },
         ),
       )
     
     );
   }
-}
-
-Widget buildItem(BuildContext context, DocumentSnapshot document){
-  _imageUrl = '${document['image']}';
-  return Card(
+  Widget buildItem(BuildContext context, DocumentSnapshot document){
+    _imageUrl = '${document['image']}';
+    return Card(
       elevation: 8.0,
       margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
       child: RaisedButton(
@@ -78,11 +83,18 @@ Widget buildItem(BuildContext context, DocumentSnapshot document){
       ),
     );
 
+  }
+
+
+  ItemInfo getItemInfo(DocumentSnapshot document){
+    ItemInfo itemInfo = new ItemInfo('${document['name']}','${document['description']}', '${document['address']}', '${document['author']}', '${document['degree']}', '${document['image']}', '${document['price']}', "${widget.value}");
+    return itemInfo;
+  }
+
+
+
+
+
+
 }
 
-
-
-ItemInfo getItemInfo(DocumentSnapshot document){
-  ItemInfo itemInfo = new ItemInfo('${document['name']}','${document['description']}', '${document['address']}', '${document['author']}', '${document['degree']}', '${document['image']}', '${document['price']}');
-  return itemInfo;
-}
