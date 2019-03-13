@@ -22,7 +22,7 @@ class _AllItemsState extends State<AllItems>{
         backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
 
         body: new StreamBuilder<QuerySnapshot>(
-          stream: Firestore.instance.collection('items').document('addItems').collection("${widget.value}").limit(20).snapshots(),
+          stream: Firestore.instance.collection('items').document('addItems').collection("${widget.value}").snapshots(),
           builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (!snapshot.hasData) {
               return Center(
