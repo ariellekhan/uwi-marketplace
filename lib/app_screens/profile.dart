@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'login.dart';
 import 'my_items.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '../authentication.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -8,14 +10,72 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  DocumentSnapshot myProfile;
+
+  @override
+  initState() {
+    super.initState();
+
+    getDocument().then((doc) {
+      setState(() {
+        myProfile = doc;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Profile"),
+        backgroundColor: Colors.green,
+      ),
+      body: myProfile == null
+          ? Container(
+              child: Center(
+                  child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.red))),
+            )
+          : buildProfile(myProfile),
+    );
+  }
+
+  Future<DocumentSnapshot> getDocument() async {
+    DocumentSnapshot ds = null;
+    try {
+      ds = await Firestore.instance
+          .collection("users")
+          .document(getUser().email)
+          .get();
+    } catch (e) {
+      ds= null;
+    }
+    return ds;
+  }
+
+  Widget buildProfile(DocumentSnapshot document) {
+    try{
+      document['email'];
+    }
+    catch(e){
+    return Container(child: Text("No user data found"));
+    }
+
+
+    String _imageUrl = '${document['userImage']}';
+
+
+
     final logo = Hero(
       tag: 'hero',
       child: CircleAvatar(
         backgroundColor: Colors.transparent,
         radius: 70.0,
-        child: Image.asset('images/profile.png'),
+        child: _imageUrl == ""
+            ? Image.asset(
+                'images/profile.png',
+              )
+            : Image.network(_imageUrl),
       ),
     );
 
@@ -23,22 +83,22 @@ class _ProfileState extends State<Profile> {
       child: Padding(
         padding: EdgeInsets.all(10.0),
         child: Text(
-          "Jane Doe",
+          '${document['name']}',
           style: TextStyle(color: Colors.green, fontSize: 24),
         ),
       ),
     );
 
     final email = Center(
-      child: Text("Email: jane.doe@my.uwi.edu"),
+      child: Text('${document['email']}'),
     );
 
     final phone = Center(
-      child: Text("Phone: 868-234-5678"),
+      child: Text('${document['phone']}'),
     );
 
     final degree = Center(
-      child: Text("Degree: B.Sc. Environmental Science"),
+      child: Text('${document['major']}'),
     );
 
     final logoutButton = Padding(
@@ -81,31 +141,24 @@ class _ProfileState extends State<Profile> {
       ),
     );
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Profile"),
-        backgroundColor: Colors.green,
-      ),
-      body: Center(
-        child: ListView(
-          shrinkWrap: true,
-          padding: EdgeInsets.only(left: 24.0, right: 24.0),
-          children: <Widget>[
-            logo,
-            SizedBox(height: 8.0),
-            name,
-            SizedBox(height: 24.0),
-            email,
-            SizedBox(height: 8.0),
-            phone,
-            SizedBox(height: 8.0),
-            degree,
-            SizedBox(height: 24.0),
-            listedItemsButton,
-            logoutButton,
-
-          ],
-        ),
+    return Center(
+      child: ListView(
+        shrinkWrap: true,
+        padding: EdgeInsets.only(left: 24.0, right: 24.0),
+        children: <Widget>[
+          logo,
+          SizedBox(height: 8.0),
+          name,
+          SizedBox(height: 24.0),
+          email,
+          SizedBox(height: 8.0),
+          phone,
+          SizedBox(height: 8.0),
+          degree,
+          SizedBox(height: 24.0),
+          listedItemsButton,
+          logoutButton,
+        ],
       ),
     );
   }

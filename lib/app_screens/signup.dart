@@ -3,6 +3,11 @@ import 'login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../authentication.dart';
+import 'dart:io';
+import "package:image_picker/image_picker.dart";
+import 'package:random_string/random_string.dart' as random;
+import 'package:firebase_storage/firebase_storage.dart';
+
 
 class SignUp extends StatefulWidget {
   static String tag = 'signup-page';
@@ -15,6 +20,8 @@ class _SignUpState extends State<SignUp> {
   FirebaseAuth mAuth;
   final myController = TextEditingController();
   final myController2 = TextEditingController();
+  File _userImage;
+  String _imageUrl;
   // dropdown menu lists
   List _degreeLevels = [
     "B.A.",
@@ -148,6 +155,18 @@ class _SignUpState extends State<SignUp> {
           Navigator.of(context).pushNamed(LoginPage.tag);
         });
 
+    final uploadBtn = Padding(
+      padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 100.0),
+      child: RaisedButton(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(0),
+        ),
+        padding: EdgeInsets.all(12),
+        color: Colors.redAccent,
+        child: Text('Upload Profile Image', style: TextStyle(color: Colors.white)),
+        onPressed: getImage,
+      ),
+    );
     return Form(
       key: _formKey,
       child: Scaffold(
@@ -184,6 +203,8 @@ class _SignUpState extends State<SignUp> {
               SizedBox(height: 8.0),
               password,
               SizedBox(height: 24.0),
+              _userImage == null ? placeholderImage() : uploadedImage(),
+              uploadBtn,
               signupButton,
               accountLabel,
             ],
@@ -210,7 +231,7 @@ class _SignUpState extends State<SignUp> {
   //adds items collection to firebase
   void addToDatabase() {
     Firestore.instance.collection('users').document(_email).setData(
-        {'name': _name, 'email': _email, 'phone': _phone, 'major': _major});
+        {'name': _name, 'email': _email, 'phone': _phone, 'major': _major, 'userImage': _imageUrl});
   }
 
   void _validateInputs() {
@@ -220,8 +241,8 @@ class _SignUpState extends State<SignUp> {
       handleCreateUser(myController.text, myController2.text);
 
       //Add user info to firebase
-      addToDatabase();
-      Navigator.of(context).pushNamed(LoginPage.tag);
+      _uploadToFirestore();
+      _showAlert("User Created", "Sign up Successful");
     } else {
 //    If all data are not valid then start auto validation.
       setState(() {
@@ -230,4 +251,72 @@ class _SignUpState extends State<SignUp> {
     }
   } // _validateInputs
 
+  //gets image from device
+  Future getImage() async {
+    var deviceImage = await ImagePicker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      _userImage = deviceImage;
+    });
+  }
+
+  Widget uploadedImage() {
+    return Container(
+        child: Column(children: <Widget>[
+          Image.file(_userImage, height: 100.0, width: 100.0),
+        ]));
+  }
+
+  Widget placeholderImage() {
+    return Container(
+        child: Column(children: <Widget>[
+          Image.asset(
+            'images/placeholder.png',
+            height: 100.0,
+            width: 100.0,
+          )
+        ]));
+  }
+
+//returns the downloaded url
+  Future addImageToFirebase(String imageName, File file) async {
+    final StorageReference firebaseStorageRef =
+    FirebaseStorage.instance.ref().child("userImages/" + imageName);
+    final StorageUploadTask task = firebaseStorageRef.putFile(file);
+    var downUrl = await (await task.onComplete).ref.getDownloadURL();
+    _imageUrl = downUrl;
+  }
+
+  void _showAlert(String _t, String _c) {
+    _userImage = null;
+    _imageUrl = "";
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: new Text(_t),
+            content: new Text(_c),
+            actions: <Widget>[
+              new FlatButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed(LoginPage.tag);
+
+                },
+                child: new Text("close"),
+              )
+            ],
+          );
+        });
+  }
+
+  Future _uploadToFirestore() async {
+    if (_userImage != null) {
+      addImageToFirebase(random.randomString(10), _userImage).then((_) {
+        addToDatabase();
+      }).catchError((e) {});
+    } else {
+      _imageUrl = "";
+      addToDatabase();
+    }
+  }
 }
