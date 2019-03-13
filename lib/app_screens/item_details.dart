@@ -52,6 +52,27 @@ class _ItemDetailsState extends State<ItemDetails> {
       ),
     );
 
+    final author = Center(
+      child: Padding(
+        padding: EdgeInsets.all(5.0),
+        child: Text(
+          'Author: ${widget.itemInfo.author}',
+          style: TextStyle(color: Colors.black, fontSize: 19),
+        ),
+      ),
+    );
+
+    final address = Center(
+      child: Padding(
+        padding: EdgeInsets.all(5.0),
+        child: Text(
+          'Address: ${widget.itemInfo.address}',
+          style: TextStyle(color: Colors.black, fontSize: 19),
+        ),
+      ),
+    );
+
+
     final orderButton = Padding(
       padding: EdgeInsets.symmetric(vertical: 16.0),
       child: RaisedButton(
@@ -68,6 +89,54 @@ class _ItemDetailsState extends State<ItemDetails> {
       ),
     );
 
+List<Widget> getItemDetails(){
+  if(widget.itemInfo.category == "Text Book" ){
+    return <Widget>[
+      img,
+      SizedBox(height: 8.0),
+      name,
+      SizedBox(height: 24.0),
+      author,
+      SizedBox(height: 8.0),
+      cost,
+      SizedBox(height: 8.0),
+      description,
+      SizedBox(height: 8.0),
+
+      orderButton,
+    ];
+  }
+  else  if(widget.itemInfo.category == "Dorm" ){
+    return <Widget>[
+      img,
+      SizedBox(height: 8.0),
+      name,
+      SizedBox(height: 24.0),
+      address,
+      SizedBox(height: 8.0),
+      cost,
+      SizedBox(height: 8.0),
+      description,
+      SizedBox(height: 8.0),
+
+      orderButton,
+    ];
+}
+  else {
+    return <Widget>[
+      img,
+      SizedBox(height: 8.0),
+      name,
+      SizedBox(height: 24.0),
+      cost,
+      SizedBox(height: 8.0),
+      description,
+      SizedBox(height: 8.0),
+
+      orderButton,
+    ];
+  }
+}
     return Scaffold(
       appBar: AppBar(
         title: Text("Item Details"),
@@ -77,18 +146,7 @@ class _ItemDetailsState extends State<ItemDetails> {
         child: ListView(
           shrinkWrap: true,
           padding: EdgeInsets.only(left: 24.0, right: 24.0),
-          children: <Widget>[
-            img,
-            SizedBox(height: 8.0),
-            name,
-            SizedBox(height: 24.0),
-            cost,
-            SizedBox(height: 8.0),
-            description,
-            SizedBox(height: 8.0),
-
-            orderButton,
-          ],
+          children: getItemDetails(),
         ),
       ),
     );

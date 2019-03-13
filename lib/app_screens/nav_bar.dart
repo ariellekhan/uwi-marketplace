@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'add_items.dart';
-import 'login.dart';
-import 'signup.dart';
+import 'chat.dart';
+import 'feed.dart';
+import 'profile.dart';
 import 'categories.dart';
 import 'home.dart';
 
@@ -15,11 +16,11 @@ class _NavBarState extends State<NavBar> {
   //For bottom navigation bar
   int currentTabIndex = 2;
   List<Widget> tabs = [
-    SignUp(),
+    ItemForm(),
     Categories(),
     Home(),
-    ItemForm(),
-    LoginPage(),
+    Chat(),
+    Profile(),
   ];
 
   onTapped(int index) {

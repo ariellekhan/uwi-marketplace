@@ -6,7 +6,8 @@ class ItemInfo {
   final String degree;
   final String imageUrl;
   final String price;
+  final String category;
 
-  ItemInfo(this.name, this.description, this.address, this.author, this.degree, this.imageUrl, this.price);
+  ItemInfo(this.name, this.description, this.address, this.author, this.degree, this.imageUrl, this.price, this.category);
 
 }
