@@ -6,6 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:random_string/random_string.dart' as random;
 import '../authentication.dart';
 import 'nav_bar.dart';
+import 'package:ntp/ntp.dart';
 
 class ItemForm extends StatefulWidget {
   static String tag = 'item-form';
@@ -40,6 +41,10 @@ class _ItemFormState extends State<ItemForm> {
   String _address = '';
   File _itemImage;
   String _imageUrl;
+
+  DateTime _currentTime;
+  DateTime _ntpTime;
+  int _ntpOffset;
 
   @override
   Widget build(BuildContext context) {
@@ -272,14 +277,14 @@ class _ItemFormState extends State<ItemForm> {
 
   //adds items collection to firebase
   void addToDatabase() {
-    String dateNow = new DateTime.now().toString(); //get current time
+    String dateNow = _ntpTime.toString();
 
     String documentID = Firestore.instance //get documentID
         .collection("allItems")
         .document().documentID;
 
     String userID = getUser().uid; //get userID
-
+    String userEmail = getUser().email;
     //json of the product's information to be stored
     Map<String, dynamic> productData = {
       'address': _address,
@@ -311,8 +316,8 @@ class _ItemFormState extends State<ItemForm> {
 
     //adds to userItems
     Firestore.instance
-        .collection("userItems")
-        .document(userID)
+        .collection("users")
+        .document(userEmail)
         .collection("myItems")
         .document()
         .setData(productData);
@@ -395,12 +400,34 @@ class _ItemFormState extends State<ItemForm> {
   Future _uploadToFirestore() async {
     if (_itemImage != null) {
       addImageToFirebase(random.randomString(10), _itemImage).then((_) {
+
+        _updateTime().then((_) {
           addToDatabase();
+        }).catchError((e) {});
+
+
+
       }).catchError((e) {});
     } else {
       _imageUrl = "";
+      _updateTime().then((_) {
         addToDatabase();
+      }).catchError((e) {});
 
     }
   }
+
+
+  Future _updateTime() async {
+    _currentTime = DateTime.now();
+   await NTP.getNtpOffset().then((value) {
+      setState(() {
+        _ntpOffset = value;
+        _ntpTime = _currentTime.add(Duration(milliseconds: _ntpOffset));
+      });
+    });
+  }
 }
+
+
+

@@ -8,7 +8,6 @@ MERGED from [androidx.multidex:multidex:2.0.0] C:\Users\phire\.gradle\caches\tra
 MERGED from [:firebase_analytics] C:\Users\phire\AndroidStudioProjects\uwi-marketplace\build\firebase_analytics\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:2:1-11:12
 MERGED from [:firebase_auth] C:\Users\phire\AndroidStudioProjects\uwi-marketplace\build\firebase_auth\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:2:1-7:12
 MERGED from [:image_picker] C:\Users\phire\AndroidStudioProjects\uwi-marketplace\build\image_picker\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:2:1-22:12
-MERGED from [:true_time] C:\Users\phire\AndroidStudioProjects\uwi-marketplace\build\true_time\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:2:1-9:12
 MERGED from [:google_sign_in] C:\Users\phire\AndroidStudioProjects\uwi-marketplace\build\google_sign_in\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:2:1-9:12
 MERGED from [:cloud_firestore] C:\Users\phire\AndroidStudioProjects\uwi-marketplace\build\cloud_firestore\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:2:1-7:12
 MERGED from [:firebase_core] C:\Users\phire\AndroidStudioProjects\uwi-marketplace\build\firebase_core\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:2:1-7:12
@@ -39,8 +38,6 @@ MERGED from [com.google.android.gms:play-services-ads-identifier:16.0.0] C:\User
 MERGED from [com.google.firebase:firebase-measurement-connector:17.0.1] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\jetified-firebase-measurement-connector-17.0.1.aar\3fc1267a409d1f28f765b6ed08a522fb\AndroidManifest.xml:17:1-25:12
 MERGED from [com.google.android.gms:play-services-basement:16.1.0] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\jetified-play-services-basement-16.1.0.aar\449bc92259e43e68b07172ae9982ca09\AndroidManifest.xml:17:1-28:12
 MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\legacy-support-v4-1.0.0.aar\381c60f436bb11f5953278057b036d3d\AndroidManifest.xml:17:1-22:12
-MERGED from [com.github.instacart.truetime-android:library-extension-rx:3.4] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\library-extension-rx-3.4.aar\f0c48bb9b78c077067effea7be8992a5\AndroidManifest.xml:2:1-11:12
-MERGED from [io.reactivex.rxjava2:rxandroid:2.0.1] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\rxandroid-2.0.1.aar\726de2757fd4fe304da3e141da0978ac\AndroidManifest.xml:15:1-21:12
 MERGED from [androidx.media:media:1.0.0] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\media-1.0.0.aar\370644091a7dd0d75d53decb3d9b75ae\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.fragment:fragment:1.0.0] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\fragment-1.0.0.aar\115931fe2057b927b84c3024280d4874\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\legacy-support-core-ui-1.0.0.aar\4d6eb13b216d3a5896d9b9a2636c1653\AndroidManifest.xml:17:1-22:12
@@ -66,7 +63,6 @@ MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\phire\.gradle
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\lifecycle-livedata-core-2.0.0.aar\5bc0f6bc9a40507e80d16c01172ed6c4\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\core-runtime-2.0.0.aar\718ea4d7035f2a0c3c4739a43ca8f5d4\AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.android.gms:play-services-measurement-base:16.0.3] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\play-services-measurement-base-16.0.3.aar\5e3fda42ce7cb9300be14a4312d78482\AndroidManifest.xml:2:1-9:12
-MERGED from [com.github.instacart.truetime-android:library:3.4] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\library-3.4.aar\4f1515029519ffae0fe5b116631b06f0\AndroidManifest.xml:2:1-27:12
 MERGED from [com.google.firebase:protolite-well-known-types:16.0.0] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\protolite-well-known-types-16.0.0.aar\4534e6d723f64dd07668fe2d9b9a02fc\AndroidManifest.xml:2:1-11:12
 INJECTED from C:\Users\phire\AndroidStudioProjects\uwi-marketplace\android\app\src\main\AndroidManifest.xml:1:1-39:12
 INJECTED from C:\Users\phire\AndroidStudioProjects\uwi-marketplace\android\app\src\main\AndroidManifest.xml:1:1-39:12
@@ -89,8 +85,6 @@ uses-permission#android.permission.INTERNET
 ADDED from C:\Users\phire\AndroidStudioProjects\uwi-marketplace\android\app\src\main\AndroidManifest.xml:8:5-66
 MERGED from [:firebase_analytics] C:\Users\phire\AndroidStudioProjects\uwi-marketplace\build\firebase_analytics\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:8:5-67
 MERGED from [:firebase_analytics] C:\Users\phire\AndroidStudioProjects\uwi-marketplace\build\firebase_analytics\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:8:5-67
-MERGED from [:true_time] C:\Users\phire\AndroidStudioProjects\uwi-marketplace\build\true_time\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:7:5-67
-MERGED from [:true_time] C:\Users\phire\AndroidStudioProjects\uwi-marketplace\build\true_time\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:7:5-67
 MERGED from [:google_sign_in] C:\Users\phire\AndroidStudioProjects\uwi-marketplace\build\google_sign_in\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:7:5-67
 MERGED from [:google_sign_in] C:\Users\phire\AndroidStudioProjects\uwi-marketplace\build\google_sign_in\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:7:5-67
 MERGED from [com.google.android.gms:play-services-gcm:16.0.0] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\jetified-play-services-gcm-16.0.0.aar\d171b5f59d64023565137d25bab34cd4\AndroidManifest.xml:24:5-67
@@ -109,8 +103,6 @@ MERGED from [com.google.firebase:firebase-analytics-impl:16.2.2] C:\Users\phire\
 MERGED from [com.google.firebase:firebase-analytics-impl:16.2.2] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\jetified-firebase-analytics-impl-16.2.2.aar\960cb19e2efa5b8119ee49f3bb41d7b2\AndroidManifest.xml:23:5-67
 MERGED from [com.google.firebase:firebase-iid:17.0.3] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\jetified-firebase-iid-17.0.3.aar\6caf3a8f066d682164fd54de7d983974\AndroidManifest.xml:23:5-67
 MERGED from [com.google.firebase:firebase-iid:17.0.3] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\jetified-firebase-iid-17.0.3.aar\6caf3a8f066d682164fd54de7d983974\AndroidManifest.xml:23:5-67
-MERGED from [com.github.instacart.truetime-android:library:3.4] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\library-3.4.aar\4f1515029519ffae0fe5b116631b06f0\AndroidManifest.xml:10:5-67
-MERGED from [com.github.instacart.truetime-android:library:3.4] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\library-3.4.aar\4f1515029519ffae0fe5b116631b06f0\AndroidManifest.xml:10:5-67
 	android:name
 		ADDED from C:\Users\phire\AndroidStudioProjects\uwi-marketplace\android\app\src\main\AndroidManifest.xml:8:22-64
 uses-permission#android.permission.READ_EXTERNAL_STORAGE
@@ -163,16 +155,12 @@ MERGED from [com.google.firebase:firebase-measurement-connector:17.0.1] C:\Users
 MERGED from [com.google.firebase:firebase-measurement-connector:17.0.1] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\jetified-firebase-measurement-connector-17.0.1.aar\3fc1267a409d1f28f765b6ed08a522fb\AndroidManifest.xml:22:5-23:19
 MERGED from [com.google.android.gms:play-services-basement:16.1.0] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\jetified-play-services-basement-16.1.0.aar\449bc92259e43e68b07172ae9982ca09\AndroidManifest.xml:22:5-26:19
 MERGED from [com.google.android.gms:play-services-basement:16.1.0] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\jetified-play-services-basement-16.1.0.aar\449bc92259e43e68b07172ae9982ca09\AndroidManifest.xml:22:5-26:19
-MERGED from [com.github.instacart.truetime-android:library-extension-rx:3.4] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\library-extension-rx-3.4.aar\f0c48bb9b78c077067effea7be8992a5\AndroidManifest.xml:9:5-20
-MERGED from [com.github.instacart.truetime-android:library-extension-rx:3.4] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\library-extension-rx-3.4.aar\f0c48bb9b78c077067effea7be8992a5\AndroidManifest.xml:9:5-20
 MERGED from [androidx.core:core:1.0.0] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\core-1.0.0.aar\40923b582b91452afdf45ffc49de6bf5\AndroidManifest.xml:22:5-89
 MERGED from [androidx.core:core:1.0.0] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\core-1.0.0.aar\40923b582b91452afdf45ffc49de6bf5\AndroidManifest.xml:22:5-89
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\versionedparcelable-1.0.0.aar\35d0eb5b4cbc6eadec3bb333ffc01be3\AndroidManifest.xml:22:5-23:19
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\versionedparcelable-1.0.0.aar\35d0eb5b4cbc6eadec3bb333ffc01be3\AndroidManifest.xml:22:5-23:19
 MERGED from [com.google.android.gms:play-services-measurement-base:16.0.3] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\play-services-measurement-base-16.0.3.aar\5e3fda42ce7cb9300be14a4312d78482\AndroidManifest.xml:7:5-20
 MERGED from [com.google.android.gms:play-services-measurement-base:16.0.3] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\play-services-measurement-base-16.0.3.aar\5e3fda42ce7cb9300be14a4312d78482\AndroidManifest.xml:7:5-20
-MERGED from [com.github.instacart.truetime-android:library:3.4] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\library-3.4.aar\4f1515029519ffae0fe5b116631b06f0\AndroidManifest.xml:17:5-25:19
-MERGED from [com.github.instacart.truetime-android:library:3.4] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\library-3.4.aar\4f1515029519ffae0fe5b116631b06f0\AndroidManifest.xml:17:5-25:19
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.0.0] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\core-1.0.0.aar\40923b582b91452afdf45ffc49de6bf5\AndroidManifest.xml:22:18-86
 	android:label
@@ -223,8 +211,6 @@ MERGED from [:firebase_auth] C:\Users\phire\AndroidStudioProjects\uwi-marketplac
 MERGED from [:firebase_auth] C:\Users\phire\AndroidStudioProjects\uwi-marketplace\build\firebase_auth\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:5:5-44
 MERGED from [:image_picker] C:\Users\phire\AndroidStudioProjects\uwi-marketplace\build\image_picker\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:5:5-44
 MERGED from [:image_picker] C:\Users\phire\AndroidStudioProjects\uwi-marketplace\build\image_picker\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:5:5-44
-MERGED from [:true_time] C:\Users\phire\AndroidStudioProjects\uwi-marketplace\build\true_time\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:5:5-44
-MERGED from [:true_time] C:\Users\phire\AndroidStudioProjects\uwi-marketplace\build\true_time\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:5:5-44
 MERGED from [:google_sign_in] C:\Users\phire\AndroidStudioProjects\uwi-marketplace\build\google_sign_in\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:5:5-44
 MERGED from [:google_sign_in] C:\Users\phire\AndroidStudioProjects\uwi-marketplace\build\google_sign_in\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:5:5-44
 MERGED from [:cloud_firestore] C:\Users\phire\AndroidStudioProjects\uwi-marketplace\build\cloud_firestore\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:5:5-44
@@ -285,10 +271,6 @@ MERGED from [com.google.android.gms:play-services-basement:16.1.0] C:\Users\phir
 MERGED from [com.google.android.gms:play-services-basement:16.1.0] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\jetified-play-services-basement-16.1.0.aar\449bc92259e43e68b07172ae9982ca09\AndroidManifest.xml:20:5-44
 MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\legacy-support-v4-1.0.0.aar\381c60f436bb11f5953278057b036d3d\AndroidManifest.xml:20:5-44
 MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\legacy-support-v4-1.0.0.aar\381c60f436bb11f5953278057b036d3d\AndroidManifest.xml:20:5-44
-MERGED from [com.github.instacart.truetime-android:library-extension-rx:3.4] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\library-extension-rx-3.4.aar\f0c48bb9b78c077067effea7be8992a5\AndroidManifest.xml:7:5-43
-MERGED from [com.github.instacart.truetime-android:library-extension-rx:3.4] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\library-extension-rx-3.4.aar\f0c48bb9b78c077067effea7be8992a5\AndroidManifest.xml:7:5-43
-MERGED from [io.reactivex.rxjava2:rxandroid:2.0.1] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\rxandroid-2.0.1.aar\726de2757fd4fe304da3e141da0978ac\AndroidManifest.xml:19:5-43
-MERGED from [io.reactivex.rxjava2:rxandroid:2.0.1] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\rxandroid-2.0.1.aar\726de2757fd4fe304da3e141da0978ac\AndroidManifest.xml:19:5-43
 MERGED from [androidx.media:media:1.0.0] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\media-1.0.0.aar\370644091a7dd0d75d53decb3d9b75ae\AndroidManifest.xml:20:5-44
 MERGED from [androidx.media:media:1.0.0] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\media-1.0.0.aar\370644091a7dd0d75d53decb3d9b75ae\AndroidManifest.xml:20:5-44
 MERGED from [androidx.fragment:fragment:1.0.0] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\fragment-1.0.0.aar\115931fe2057b927b84c3024280d4874\AndroidManifest.xml:20:5-44
@@ -339,8 +321,6 @@ MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\phire\.gradle\cache
 MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\core-runtime-2.0.0.aar\718ea4d7035f2a0c3c4739a43ca8f5d4\AndroidManifest.xml:20:5-44
 MERGED from [com.google.android.gms:play-services-measurement-base:16.0.3] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\play-services-measurement-base-16.0.3.aar\5e3fda42ce7cb9300be14a4312d78482\AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-measurement-base:16.0.3] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\play-services-measurement-base-16.0.3.aar\5e3fda42ce7cb9300be14a4312d78482\AndroidManifest.xml:5:5-44
-MERGED from [com.github.instacart.truetime-android:library:3.4] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\library-3.4.aar\4f1515029519ffae0fe5b116631b06f0\AndroidManifest.xml:7:5-43
-MERGED from [com.github.instacart.truetime-android:library:3.4] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\library-3.4.aar\4f1515029519ffae0fe5b116631b06f0\AndroidManifest.xml:7:5-43
 MERGED from [com.google.firebase:protolite-well-known-types:16.0.0] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\protolite-well-known-types-16.0.0.aar\4534e6d723f64dd07668fe2d9b9a02fc\AndroidManifest.xml:7:5-9:41
 MERGED from [com.google.firebase:protolite-well-known-types:16.0.0] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\protolite-well-known-types-16.0.0.aar\4534e6d723f64dd07668fe2d9b9a02fc\AndroidManifest.xml:7:5-9:41
 INJECTED from C:\Users\phire\AndroidStudioProjects\uwi-marketplace\android\app\src\main\AndroidManifest.xml
@@ -367,8 +347,6 @@ MERGED from [com.google.firebase:firebase-analytics-impl:16.2.2] C:\Users\phire\
 MERGED from [com.google.firebase:firebase-analytics-impl:16.2.2] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\jetified-firebase-analytics-impl-16.2.2.aar\960cb19e2efa5b8119ee49f3bb41d7b2\AndroidManifest.xml:24:5-79
 MERGED from [com.google.firebase:firebase-iid:17.0.3] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\jetified-firebase-iid-17.0.3.aar\6caf3a8f066d682164fd54de7d983974\AndroidManifest.xml:22:5-79
 MERGED from [com.google.firebase:firebase-iid:17.0.3] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\jetified-firebase-iid-17.0.3.aar\6caf3a8f066d682164fd54de7d983974\AndroidManifest.xml:22:5-79
-MERGED from [com.github.instacart.truetime-android:library:3.4] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\library-3.4.aar\4f1515029519ffae0fe5b116631b06f0\AndroidManifest.xml:11:5-79
-MERGED from [com.github.instacart.truetime-android:library:3.4] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\library-3.4.aar\4f1515029519ffae0fe5b116631b06f0\AndroidManifest.xml:11:5-79
 	android:name
 		ADDED from [:firebase_analytics] C:\Users\phire\AndroidStudioProjects\uwi-marketplace\build\firebase_analytics\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:7:22-76
 uses-permission#android.permission.WAKE_LOCK
@@ -583,21 +561,3 @@ ADDED from [com.google.android.gms:play-services-basement:16.1.0] C:\Users\phire
 		ADDED from [com.google.android.gms:play-services-basement:16.1.0] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\jetified-play-services-basement-16.1.0.aar\449bc92259e43e68b07172ae9982ca09\AndroidManifest.xml:25:13-66
 	android:name
 		ADDED from [com.google.android.gms:play-services-basement:16.1.0] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\jetified-play-services-basement-16.1.0.aar\449bc92259e43e68b07172ae9982ca09\AndroidManifest.xml:24:13-58
-uses-permission#android.permission.ACCESS_WIFI_STATE
-ADDED from [com.github.instacart.truetime-android:library:3.4] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\library-3.4.aar\4f1515029519ffae0fe5b116631b06f0\AndroidManifest.xml:12:5-76
-	android:name
-		ADDED from [com.github.instacart.truetime-android:library:3.4] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\library-3.4.aar\4f1515029519ffae0fe5b116631b06f0\AndroidManifest.xml:12:22-73
-uses-permission#android.permission.RECEIVE_BOOT_COMPLETED
-ADDED from [com.github.instacart.truetime-android:library:3.4] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\library-3.4.aar\4f1515029519ffae0fe5b116631b06f0\AndroidManifest.xml:15:5-81
-	android:name
-		ADDED from [com.github.instacart.truetime-android:library:3.4] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\library-3.4.aar\4f1515029519ffae0fe5b116631b06f0\AndroidManifest.xml:15:22-78
-receiver#com.instacart.library.truetime.BootCompletedBroadcastReceiver
-ADDED from [com.github.instacart.truetime-android:library:3.4] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\library-3.4.aar\4f1515029519ffae0fe5b116631b06f0\AndroidManifest.xml:20:9-24:20
-	android:name
-		ADDED from [com.github.instacart.truetime-android:library:3.4] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\library-3.4.aar\4f1515029519ffae0fe5b116631b06f0\AndroidManifest.xml:20:19-95
-intent-filter#action:name:android.intent.action.BOOT_COMPLETED
-ADDED from [com.github.instacart.truetime-android:library:3.4] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\library-3.4.aar\4f1515029519ffae0fe5b116631b06f0\AndroidManifest.xml:21:13-23:29
-action#android.intent.action.BOOT_COMPLETED
-ADDED from [com.github.instacart.truetime-android:library:3.4] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\library-3.4.aar\4f1515029519ffae0fe5b116631b06f0\AndroidManifest.xml:22:17-79
-	android:name
-		ADDED from [com.github.instacart.truetime-android:library:3.4] C:\Users\phire\.gradle\caches\transforms-1\files-1.1\library-3.4.aar\4f1515029519ffae0fe5b116631b06f0\AndroidManifest.xml:22:25-76

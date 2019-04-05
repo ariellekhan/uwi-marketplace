@@ -230,7 +230,7 @@ class _SignUpState extends State<SignUp> {
 
   //adds items collection to firebase
   void addToDatabase() {
-    Firestore.instance.collection('users').document(_email).setData(
+    Firestore.instance.collection('users').document(_email).collection("userInfo").document(_email).setData(
         {'name': _name, 'email': _email, 'phone': _phone, 'major': _major, 'userImage': _imageUrl});
   }
 
