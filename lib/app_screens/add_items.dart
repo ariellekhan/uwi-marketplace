@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import "package:image_picker/image_picker.dart";
@@ -14,8 +13,10 @@ class ItemForm extends StatefulWidget {
   @override
   _ItemFormState createState() => new _ItemFormState();
 }
-
 class _ItemFormState extends State<ItemForm> {
+
+
+
   var _itemTypes = [
     "Type of Item",
     "Text Book",
@@ -30,15 +31,16 @@ class _ItemFormState extends State<ItemForm> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool _autoValidate = false;
-  String _desc;
-  String _items = '';
+  String _description;
+  String _category = '';
   String _author = '';
-  String _name;
+  String _name = '';
   String _price = '';
   String _degree = '';
   String _address = '';
   File _itemImage;
   String _imageUrl;
+
   @override
   Widget build(BuildContext context) {
     final desc = TextFormField(
@@ -49,21 +51,10 @@ class _ItemFormState extends State<ItemForm> {
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
       ),
       onSaved: (String val) {
-        _desc = val;
+        _description = val;
       },
     );
 
-    final items = TextFormField(
-      autofocus: false,
-      decoration: InputDecoration(
-        hintText: 'Item Description',
-        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-      ),
-      onSaved: (String val) {
-        _items = val;
-      },
-    );
 
     final name = TextFormField(
       autofocus: false,
@@ -143,7 +134,7 @@ class _ItemFormState extends State<ItemForm> {
         );
       }).toList(),
       onChanged: (String newValueSelected) {
-        _items = newValueSelected;
+        _category = newValueSelected;
         // Your code to execute, when a menu item is selected from drop down
         _onDropDownItemSelected(newValueSelected);
       },
@@ -281,28 +272,53 @@ class _ItemFormState extends State<ItemForm> {
 
   //adds items collection to firebase
   void addToDatabase() {
-    firestoreInstance('items', 'addItems', _items);
+    String dateNow = new DateTime.now().toString(); //get current time
 
-    //adds to user items
-    firestoreInstance('userItems', getUser().uid, _items);
-  }
+    String documentID = Firestore.instance //get documentID
+        .collection("allItems")
+        .document().documentID;
 
-  void firestoreInstance(String c1, String d1, String c2) {
-    Firestore.instance
-        .collection(c1)
-        .document(d1)
-        .collection(c2)
-        .document()
-        .setData({
-      'name': _name,
-      'description': _desc,
-      'author': _author,
-      'price': _price,
-      'degree': _degree,
+    String userID = getUser().uid; //get userID
+
+    //json of the product's information to be stored
+    Map<String, dynamic> productData = {
       'address': _address,
+      'author': _author,
+      'category': _category,
+      'date': dateNow,
+      'degree': _degree,
+      'description': _description,
       'image': _imageUrl,
-    });
+      'name': _name,
+      'price': _price,
+      'productID': documentID,
+      'sellerID': userID,
+      'status': 'unsold',};
+
+    //add to allItems
+    Firestore.instance
+        .collection("allItems")
+        .document(documentID)
+        .setData(productData);
+
+    //add to addItems
+    Firestore.instance
+        .collection("items")
+        .document("addItems")
+        .collection(_category)
+        .document()
+        .setData(productData);
+
+    //adds to userItems
+    Firestore.instance
+        .collection("userItems")
+        .document(userID)
+        .collection("myItems")
+        .document()
+        .setData(productData);
+
   }
+
 
   void _validateInputs() {
     if (_formKey.currentState.validate()) {
@@ -360,7 +376,7 @@ class _ItemFormState extends State<ItemForm> {
         builder: (BuildContext context) {
           return AlertDialog(
             title: new Text(_t),
-            content: new Text(_c),
+            content: new Text(_c.toString()),
             actions: <Widget>[
               new FlatButton(
                 onPressed: () {
@@ -379,11 +395,12 @@ class _ItemFormState extends State<ItemForm> {
   Future _uploadToFirestore() async {
     if (_itemImage != null) {
       addImageToFirebase(random.randomString(10), _itemImage).then((_) {
-        addToDatabase();
+          addToDatabase();
       }).catchError((e) {});
     } else {
       _imageUrl = "";
-      addToDatabase();
+        addToDatabase();
+
     }
   }
 }

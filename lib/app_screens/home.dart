@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../authentication.dart';
+import 'add_items.dart';
 
 class Home extends StatefulWidget{
 
@@ -8,7 +9,8 @@ class Home extends StatefulWidget{
 }
 
 class _HomeState extends State<Home> {
-  String email = getUser().email; //temporary code - can be deleted
+
+
   @override
   Widget build(BuildContext context) =>
       Scaffold(
@@ -17,7 +19,28 @@ class _HomeState extends State<Home> {
           backgroundColor: Colors.pink,
         ),
 
-        body: Text("Welcome $email"),
-      );
+        body: Container(
+          child:
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 16.0),
+            child: RaisedButton(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(50),
+              ),
+              onPressed: () {
+                // ADD LOGIC - change
+                // Navigator.of(context).pushNamed(Categories.tag);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => new ItemForm()),
+                );
+              },
+              padding: EdgeInsets.all(12),
+              color: Colors.green,
+              child: Text('Add Items', style: TextStyle(color: Colors.white)),
+            ),
+          ),
+        )
+  );
 
 }
