@@ -312,7 +312,7 @@ class _ItemFormState extends State<ItemForm> {
         .collection("items")
         .document("addItems")
         .collection(_category)
-        .document()
+        .document(documentID)
         .setData(productData);
 
     //adds to userItems
@@ -320,7 +320,7 @@ class _ItemFormState extends State<ItemForm> {
         .collection("users")
         .document(userEmail)
         .collection("myItems")
-        .document()
+        .document(documentID)
         .setData(productData);
 
   }

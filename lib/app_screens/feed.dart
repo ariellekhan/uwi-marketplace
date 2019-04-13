@@ -8,9 +8,9 @@ class Feed extends StatefulWidget{
   @override
   _FeedState createState() => new _FeedState();
 }
-String _imageUrl = "";
 
 class _FeedState extends State<Feed> {
+  String _imageUrl = "";
 
   @override
   Widget build(BuildContext context) {
