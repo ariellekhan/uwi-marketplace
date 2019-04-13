@@ -8,9 +8,9 @@ class Feed extends StatefulWidget{
   @override
   _FeedState createState() => new _FeedState();
 }
-String _imageUrl = "";
 
 class _FeedState extends State<Feed> {
+  String _imageUrl = "";
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +87,7 @@ class _FeedState extends State<Feed> {
 
 
   ItemInfo getItemInfo(DocumentSnapshot document){
-    ItemInfo itemInfo = new ItemInfo('${document['name']}','${document['description']}', '${document['address']}', '${document['author']}', '${document['degree']}', '${document['image']}', '${document['price']}', '${document['category']}');
+    ItemInfo itemInfo = new ItemInfo('${document['name']}','${document['description']}', '${document['address']}', '${document['author']}', '${document['degree']}', '${document['image']}', '${document['price']}', '${document['category']}', '${document['productID']}',  '${document['sellerEmail']}','${document['sellerID']}', '${document['status']}', '${document['date']}');
     return itemInfo;
   }
 

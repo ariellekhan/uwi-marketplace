@@ -45,7 +45,7 @@ class _ProfileState extends State<Profile> {
     try {
       ds = await Firestore.instance
           .collection("users")
-          .document(getUser().email)
+          .document(getUser().email).collection('userInfo').document(getUser().email)
           .get();
     } catch (e) {
       ds= null;
@@ -58,7 +58,7 @@ class _ProfileState extends State<Profile> {
       document['email'];
     }
     catch(e){
-    return Container(child: Text("No user data found"));
+    return Container(child: Text("No user data found "));
     }
 
 
