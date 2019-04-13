@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'add_items.dart';
 import 'chat.dart';
 import 'feed.dart';
 import 'profile.dart';
@@ -16,7 +15,7 @@ class _NavBarState extends State<NavBar> {
   //For bottom navigation bar
   int currentTabIndex = 2;
   List<Widget> tabs = [
-    ItemForm(),
+    Feed(),
     Categories(),
     Home(),
     Chat(),
@@ -42,7 +41,7 @@ class _NavBarState extends State<NavBar> {
           items: [
             BottomNavigationBarItem(
               icon: new Icon(Icons.rss_feed),
-              backgroundColor: Colors.lightBlueAccent,
+              backgroundColor: Colors.black38,
               title: new Text('Feed'),
             ),
             BottomNavigationBarItem(

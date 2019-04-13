@@ -15,9 +15,9 @@ class _MyItemsState extends State<MyItems> {
       appBar: new AppBar(title: new Text('My Items')),
       body: new StreamBuilder<QuerySnapshot>(
           stream: Firestore.instance
-              .collection('items')
-              .document('addItems')
-              .collection('Text Book')
+              .collection('userItems')
+              .document(getUser().uid)
+              .collection('myItems')
               .snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
