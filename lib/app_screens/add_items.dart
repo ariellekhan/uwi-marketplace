@@ -284,7 +284,7 @@ class _ItemFormState extends State<ItemForm> {
         .document().documentID;
 
     String userID = getUser().uid; //get userID
-    String userEmail = getUser().email;
+    String userEmail = getUser().email; //get user email
     //json of the product's information to be stored
     Map<String, dynamic> productData = {
       'address': _address,
@@ -298,6 +298,7 @@ class _ItemFormState extends State<ItemForm> {
       'price': _price,
       'productID': documentID,
       'sellerID': userID,
+      'sellerEmail': userEmail,
       'status': 'unsold',};
 
     //add to allItems
@@ -399,7 +400,8 @@ class _ItemFormState extends State<ItemForm> {
 
   Future _uploadToFirestore() async {
     if (_itemImage != null) {
-      addImageToFirebase(random.randomString(10), _itemImage).then((_) {
+      String imageName = DateTime.now().millisecondsSinceEpoch.toString();
+      addImageToFirebase(imageName, _itemImage).then((_) {
 
         _updateTime().then((_) {
           addToDatabase();

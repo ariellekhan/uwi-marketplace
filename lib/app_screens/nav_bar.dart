@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'chat.dart';
+import 'messages.dart';
 import 'feed.dart';
 import 'profile.dart';
 import 'categories.dart';
@@ -18,7 +18,7 @@ class _NavBarState extends State<NavBar> {
     Feed(),
     Categories(),
     Home(),
-    Chat(),
+    Messages(),
     Profile(),
   ];
 

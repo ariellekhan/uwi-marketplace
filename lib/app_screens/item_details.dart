@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import '../item_information.dart';
+import 'chat.dart';
+import '../authentication.dart';
+import '../user.dart';
 
 
 class ItemDetails extends StatefulWidget{
@@ -80,8 +83,7 @@ class _ItemDetailsState extends State<ItemDetails> {
           borderRadius: BorderRadius.circular(50),
         ),
         onPressed: () {
-
-
+          buyItem();
         },
         padding: EdgeInsets.all(12),
         color: Colors.orangeAccent,
@@ -150,5 +152,26 @@ List<Widget> getItemDetails(){
         ),
       ),
     );
+  }
+
+
+  void buyItem(){
+    String chatId ="";
+    String myId = getUser().uid;
+    String sellerID = widget.itemInfo.sellerID;
+    String sellerEmail = widget.itemInfo.sellerEmail;
+
+
+    if(myId.compareTo(sellerID) < 0){
+      chatId = '$myId-$sellerID';
+    }else{
+      chatId = '$sellerID-$myId';
+    }
+    //User peer = new User();
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => new Chat(chatId: chatId, peerEmail: sellerEmail, peerID: sellerID)),
+    );
+
   }
 }
