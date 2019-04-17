@@ -153,8 +153,8 @@ class _ItemFormState extends State<ItemForm> {
           borderRadius: BorderRadius.circular(0),
         ),
         padding: EdgeInsets.all(12),
-        color: Colors.redAccent,
-        child: Text('Upload Image', style: TextStyle(color: Colors.white)),
+        color: Colors.lightBlueAccent,
+        child: Text('Select Image', style: TextStyle(color: Colors.white)),
         onPressed: getImage,
       ),
     );
