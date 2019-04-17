@@ -41,7 +41,7 @@ class _NavBarState extends State<NavBar> {
           items: [
             BottomNavigationBarItem(
               icon: new Icon(Icons.rss_feed),
-              backgroundColor: Colors.black38,
+              backgroundColor: Colors.orange,
               title: new Text('Feed'),
             ),
             BottomNavigationBarItem(
@@ -60,7 +60,7 @@ class _NavBarState extends State<NavBar> {
                 title: Text('Messages')
             ),
             BottomNavigationBarItem(
-                backgroundColor: Colors.lightBlueAccent,
+                backgroundColor: Colors.green,
                 icon: Icon(Icons.person),
                 title: Text('Profile')
             ),

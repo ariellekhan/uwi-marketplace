@@ -57,7 +57,7 @@ class _AllItemsState extends State<AllItems>{
             },
           ),
         ],) ,
-        backgroundColor: Color.fromRGBO(58, 66, 86, 1.0) ,
+        // backgroundColor: Color.fromRGBO(58, 66, 86, 1.0) ,
 
         body: new StreamBuilder<QuerySnapshot>(
           stream: Firestore.instance.collection('items').document('addItems').collection(_category).snapshots(),
@@ -107,7 +107,8 @@ Widget buildItem(BuildContext context, DocumentSnapshot document){
     elevation: 8.0,
     margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
     child: RaisedButton(
-      color: Color.fromRGBO(64, 75, 96, .9),
+      // color: Color.fromRGBO(64, 75, 96, .9),
+      color: Colors.white70,
       onPressed: () {
         // ADD LOGIC
         ItemInfo itemInfo;
@@ -126,17 +127,17 @@ Widget buildItem(BuildContext context, DocumentSnapshot document){
           ),
           title: Text(
             '${document['name']}',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18.0),
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18.0),
           ),
 
           subtitle: Row(
             children: <Widget>[
               Icon(Icons.attach_money, color: Colors.green),
-              Text('${document['price']}', style: TextStyle(color: Colors.greenAccent))
+              Text('${document['price']}', style: TextStyle(color: Colors.green))
             ],
           ),
           trailing:
-          Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0)),
+          Icon(Icons.favorite_border, color: Colors.grey, size: 30.0)),
     ),
   );
 

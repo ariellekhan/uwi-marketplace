@@ -162,7 +162,7 @@ class _SignUpState extends State<SignUp> {
           borderRadius: BorderRadius.circular(0),
         ),
         padding: EdgeInsets.all(12),
-        color: Colors.redAccent,
+        color: Colors.lightBlueAccent,
         child: Text('Upload Profile Image', style: TextStyle(color: Colors.white)),
         onPressed: getImage,
       ),

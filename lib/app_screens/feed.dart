@@ -27,9 +27,9 @@ class _FeedState extends State<Feed> {
             ),
           ],
 
-          title: new Text("Search Feed"), backgroundColor: Colors.black38,) ,
+          title: new Text("Search Feed"), backgroundColor: Colors.orange,) ,
 
-          backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
+          // backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
 
 
           body: new StreamBuilder<QuerySnapshot>(
@@ -88,7 +88,7 @@ class Search extends SearchDelegate<String> {
   @override
   Widget buildResults(BuildContext context) {
     return Container(
-      color: Colors.black38,
+      color: Colors.white,
       child: new  StreamBuilder<QuerySnapshot>(
     stream: Firestore.instance.collection('allItems').orderBy("date", descending: true).snapshots(),
     builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -122,7 +122,7 @@ class Search extends SearchDelegate<String> {
   @override
   Widget buildSuggestions(BuildContext context) {
     return Container(
-      color: Colors.black38,
+      color: Colors.white,
       child: new  StreamBuilder<QuerySnapshot>(
         stream: Firestore.instance.collection('allItems').orderBy("date", descending: true).snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -164,7 +164,8 @@ Widget buildItem(BuildContext context, DocumentSnapshot document){
     elevation: 8.0,
     margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
     child: RaisedButton(
-      color: Color.fromRGBO(64, 75, 96, .9),
+      // color: Color.fromRGBO(64, 75, 96, .9),
+      color: Colors.white70,
       onPressed: () {
         // ADD LOGIC
         ItemInfo itemInfo;
@@ -183,17 +184,17 @@ Widget buildItem(BuildContext context, DocumentSnapshot document){
           ),
           title: Text(
             '${document['name']}',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18.0),
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18.0),
           ),
 
           subtitle: Row(
             children: <Widget>[
               Icon(Icons.attach_money, color: Colors.green),
-              Text('${document['price']}', style: TextStyle(color: Colors.greenAccent))
+              Text('${document['price']}', style: TextStyle(color: Colors.green))
             ],
           ),
           trailing:
-          Icon(Icons.keyboard_arrow_right, color: Colors.white, size: 30.0)),
+          Icon(Icons.favorite_border, color: Colors.grey, size: 30.0)),
     ),
   );
 

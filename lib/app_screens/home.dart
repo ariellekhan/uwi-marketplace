@@ -95,12 +95,12 @@ class _HomeState extends State<Home> {
       appBar: new AppBar(
         title: new Text("Home"),
         elevation: 0.0,
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.pink,
         actions: <Widget>[
           new IconButton(icon: new Icon(Icons.shopping_cart, color: Colors.white,), onPressed: (){})
         ],
       ),
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.white,
       body: new Container(
         child: new Stack(
           children: <Widget>[

@@ -92,7 +92,7 @@ class _MessagesState extends State<Messages> {
                       chatId: '${document['chatId']?? 'none'}',peerEmail: '${document['peerEmail']?? 'none'}', peerID: '${document['idTo']?? ''}',
                     )));
           },
-          color: Colors.lightGreen,
+          color: Colors.white70,
           padding: EdgeInsets.fromLTRB(25.0, 10.0, 25.0, 10.0),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
         ),
@@ -111,7 +111,8 @@ class _MessagesState extends State<Messages> {
           'Messages',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
-        centerTitle: true,
+        // centerTitle: true,
+        backgroundColor: Colors.lightBlueAccent,
       ),
       body: WillPopScope(
         child: Stack(
