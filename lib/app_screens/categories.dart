@@ -18,6 +18,19 @@ class _CategoriesState extends State<Categories> {
     appBar: AppBar(
       title: Text("Categories"),
       backgroundColor: Colors.purple,
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(Icons.add),
+          color: Colors.yellow,
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => new ItemForm()),
+            );
+
+          },
+        ),
+      ],
     ),
 
 
