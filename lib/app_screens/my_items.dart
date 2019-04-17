@@ -121,7 +121,7 @@ class _MyItemsState extends State<MyItems> {
         builder: (BuildContext context){
           return AlertDialog(
               title: new Text("Permanently Delete Item"),
-              content: new Text("This will remove your item completely from all instances in the marketplace"),
+              content: new Text("Warning! This will remove your item completely from all instances in the marketplace."),
               actions: <Widget>[
                 new FlatButton(onPressed: (){deleteItem(document);Navigator.of(context).pop();}, child: new Text("Delete")),
                 new FlatButton(onPressed: (){Navigator.of(context).pop();}, child: new Text("Cancel"))
