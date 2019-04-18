@@ -16,6 +16,7 @@ class _FeedState extends State<Feed> {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: new Scaffold(appBar: new AppBar(
           actions: <Widget>[
             IconButton(
@@ -194,7 +195,7 @@ Widget buildItem(BuildContext context, DocumentSnapshot document){
             ],
           ),
           trailing:
-          Icon(Icons.favorite_border, color: Colors.grey, size: 30.0)),
+          Icon(Icons.arrow_right, color: Colors.grey, size: 30.0)),
     ),
   );
 

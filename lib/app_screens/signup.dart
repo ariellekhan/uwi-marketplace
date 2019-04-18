@@ -229,8 +229,8 @@ class _SignUpState extends State<SignUp> {
   } // validateEmail
 
   //adds items collection to firebase
-  void addToDatabase() {
-    Firestore.instance.collection('users').document(_email).collection("userInfo").document(_email).setData(
+  Future addToDatabase() async{
+    await Firestore.instance.collection('users').document(_email).collection("userInfo").document(_email).setData(
         {'name': _name, 'email': _email, 'phone': _phone, 'major': _major, 'userImage': _imageUrl});
   }
 

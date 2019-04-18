@@ -386,6 +386,8 @@ class _ItemFormState extends State<ItemForm> {
             actions: <Widget>[
               new FlatButton(
                 onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.pop(context);
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => new NavBar()),

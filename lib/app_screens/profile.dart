@@ -90,15 +90,15 @@ class _ProfileState extends State<Profile> {
     );
 
     final email = Center(
-      child: Text('${document['email']}'),
+      child: Text('Email: ${document['email']}'),
     );
 
     final phone = Center(
-      child: Text('${document['phone']}'),
+      child: Text('Phone: ${document['phone']}'),
     );
 
     final degree = Center(
-      child: Text('${document['major']}'),
+      child: Text('Degree: ${document['major']}'),
     );
 
     final logoutButton = Padding(
