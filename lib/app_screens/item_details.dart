@@ -3,7 +3,7 @@ import '../item_information.dart';
 import 'chat.dart';
 import '../authentication.dart';
 import '../user.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ItemDetails extends StatefulWidget{
   final ItemInfo itemInfo;
@@ -15,6 +15,23 @@ class ItemDetails extends StatefulWidget{
 }
 
 class _ItemDetailsState extends State<ItemDetails> {
+
+  @override
+  initState() {
+    super.initState();
+
+    getDocument().then((doc) {
+      setState(() {
+        if(doc.exists){
+          iconState = Icon(Icons.favorite, color: Colors.red,);
+          isFav = true;
+
+        }
+      });
+    });
+  }
+  Icon iconState = Icon(Icons.favorite_border,);
+  bool isFav = false;
   @override
   Widget build(BuildContext context) {
     String _imageUrl = widget.itemInfo.imageUrl;
@@ -91,6 +108,23 @@ class _ItemDetailsState extends State<ItemDetails> {
       ),
     );
 
+  final favIcon =   new IconButton(
+    icon: iconState,
+    onPressed: () {
+        setState(() {
+          isFav = !isFav;
+          if(isFav){
+            iconState = Icon(Icons.favorite, color: Colors.red,);
+            addToFavourites();
+          }else{
+            iconState = Icon(Icons.favorite_border,);
+            deleteFromFavourites();
+          }
+        });
+    },
+  );
+
+
 List<Widget> getItemDetails(){
   if(widget.itemInfo.category == "Text Book" ){
     return <Widget>[
@@ -105,6 +139,7 @@ List<Widget> getItemDetails(){
       description,
       SizedBox(height: 8.0),
 
+      favIcon,
       orderButton,
     ];
   }
@@ -121,6 +156,7 @@ List<Widget> getItemDetails(){
       description,
       SizedBox(height: 8.0),
 
+      favIcon,
       orderButton,
     ];
 }
@@ -135,7 +171,9 @@ List<Widget> getItemDetails(){
       description,
       SizedBox(height: 8.0),
 
+      favIcon,
       orderButton,
+
     ];
   }
 }
@@ -173,5 +211,42 @@ List<Widget> getItemDetails(){
       MaterialPageRoute(builder: (context) => new Chat(chatId: chatId, peerEmail: sellerEmail, peerID: sellerID)),
     );
 
+  }
+
+
+  Future addToFavourites() async{
+    await Firestore.instance.collection('users').document(getUser().email).collection("myFavourites").document(widget.itemInfo.productID).setData(
+        {'address': widget.itemInfo.address,
+          'author': widget.itemInfo.author,
+          'category': widget.itemInfo.category,
+          'date': widget.itemInfo.date,
+          'degree': widget.itemInfo.degree,
+          'description': widget.itemInfo.description,
+          'image': widget.itemInfo.imageUrl,
+          'name': widget.itemInfo.name,
+          'price': widget.itemInfo.price,
+          'productID': widget.itemInfo.productID,
+          'sellerID': widget.itemInfo.sellerID,
+          'sellerEmail': widget.itemInfo.sellerEmail,
+          'status': 'unsold',});
+  }
+
+  Future deleteFromFavourites() async{
+    await Firestore.instance .collection('users')
+        .document(getUser().email)
+        .collection('myFavourites').document(widget.itemInfo.productID).delete();
+  }
+
+  Future<DocumentSnapshot> getDocument() async {
+    DocumentSnapshot ds = null;
+    try {
+      ds = await Firestore.instance
+          .collection("users")
+          .document(getUser().email).collection('myFavourites').document(widget.itemInfo.productID)
+          .get();
+    } catch (e) {
+      ds= null;
+    }
+    return ds;
   }
 }
