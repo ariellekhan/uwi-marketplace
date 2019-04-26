@@ -51,7 +51,7 @@ class _CategoriesState extends State<Categories> {
                   );
                 },
                 color: Colors.green,
-                padding: EdgeInsets.all(60.0),
+                padding: EdgeInsets.all(45.0),
                 child: Column(
                   // Replace with a Row for horizontal icon + text
                   children: <Widget>[
@@ -77,7 +77,7 @@ class _CategoriesState extends State<Categories> {
                   );
                 },
                 color: Colors.orange,
-                padding: EdgeInsets.all(60.0),
+                padding: EdgeInsets.all(45.0),
                 child: Column(
                   // Replace with a Row for horizontal icon + text
                   children: <Widget>[
@@ -108,7 +108,7 @@ class _CategoriesState extends State<Categories> {
                   );
                 },
                 color: Colors.purple,
-                padding: EdgeInsets.all(60.0),
+                padding: EdgeInsets.all(45.0),
                 child: Column(
                   // Replace with a Row for horizontal icon + text
                   children: <Widget>[
@@ -134,7 +134,7 @@ class _CategoriesState extends State<Categories> {
                   );
                 },
                 color: Colors.yellow,
-                padding: EdgeInsets.all(60.0),
+                padding: EdgeInsets.all(45.0),
                 child: Column(
                   // Replace with a Row for horizontal icon + text
                   children: <Widget>[
@@ -164,7 +164,7 @@ class _CategoriesState extends State<Categories> {
                   );
                 },
                 color: Colors.blue,
-                padding: EdgeInsets.all(60.0),
+                padding: EdgeInsets.all(45.0),
                 child: Column(
                   // Replace with a Row for horizontal icon + text
                   children: <Widget>[
@@ -190,7 +190,7 @@ class _CategoriesState extends State<Categories> {
                   );
                 },
                 color: Colors.pink,
-                padding: EdgeInsets.all(60.0),
+                padding: EdgeInsets.all(45.0),
                 child: Column(
                   // Replace with a Row for horizontal icon + text
                   children: <Widget>[

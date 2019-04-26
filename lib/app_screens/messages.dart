@@ -32,7 +32,7 @@ class _MessagesState extends State<Messages> {
         msg ="";
       }
       if(msg.length > 25){
-        msg = msg.substring(1,25) + '...';
+        msg = msg.substring(0,24) + '...';
       }
       return Container(
         child: FlatButton(

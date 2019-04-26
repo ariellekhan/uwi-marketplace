@@ -387,7 +387,6 @@ class _ItemFormState extends State<ItemForm> {
               new FlatButton(
                 onPressed: () {
                   Navigator.pop(context);
-                  Navigator.pop(context);
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => new NavBar()),
@@ -403,7 +402,7 @@ class _ItemFormState extends State<ItemForm> {
   Future _uploadToFirestore() async {
     if (_itemImage != null) {
       String imageName = DateTime.now().millisecondsSinceEpoch.toString();
-      addImageToFirebase(imageName, _itemImage).then((_) {
+      await addImageToFirebase(imageName, _itemImage).then((_) {
 
         _updateTime().then((_) {
           addToDatabase();

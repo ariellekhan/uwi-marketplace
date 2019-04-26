@@ -1,9 +1,6 @@
-//SOURCE: https://github.com/putraxor/flutter-login-ui/tree/master/lib
-
 import 'package:flutter/material.dart';
 import 'signup.dart';
 import '../authentication.dart';
-import 'add_items.dart';
 import 'nav_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -14,8 +11,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final emailController = TextEditingController(text:"");
-  final passwordController = TextEditingController(text:"");
+  final _emailController = TextEditingController(text: "");
+  final _passwordController = TextEditingController(text: "");
+
   @override
   Widget build(BuildContext context) {
     final logo = Hero(
@@ -26,8 +24,9 @@ class _LoginPageState extends State<LoginPage> {
         child: Image.asset('images/logo.png'),
       ),
     );
+
     final email = TextFormField(
-      controller: emailController,
+      controller: _emailController,
       keyboardType: TextInputType.emailAddress,
       autofocus: false,
       decoration: InputDecoration(
@@ -38,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     final password = TextFormField(
-      controller: passwordController,
+      controller: _passwordController,
       autofocus: false,
       obscureText: true,
       decoration: InputDecoration(
@@ -55,11 +54,7 @@ class _LoginPageState extends State<LoginPage> {
           borderRadius: BorderRadius.circular(24),
         ),
         onPressed: () {
-          // ADD LOGIC - change
-          // Navigator.of(context).pushNamed(Categories.tag);
-
-        signIn();
-
+          signIn();
         },
         padding: EdgeInsets.all(12),
         color: Colors.lightBlueAccent,
@@ -68,29 +63,29 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     final forgotLabel = FlatButton(
-      child: Text(
-        'Forgot password?',
-        style: TextStyle(color: Colors.black54),
-      ),
-      onPressed: () {
-        // ADD LOGIC
-
-      }
-    );
+        child: Text(
+          'Forgot password?',
+          style: TextStyle(color: Colors.black54),
+        ),
+        onPressed: () {
+          _resetPassword();
+        });
 
     final newUserLabel = FlatButton(
-    child: Text(
-    'New here? Sign Up',
-    style: TextStyle(color: Colors.black38),
-    ),
-    onPressed: () {
-       Navigator.of(context).pushNamed(SignUp.tag);
-     }
-    );
+        child: Text(
+          'New here? Sign Up',
+          style: TextStyle(color: Colors.black38),
+        ),
+        onPressed: () {
+          Navigator.of(context).pushNamed(SignUp.tag);
+        });
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(title: Text('UWI MARKETPLACE'), backgroundColor: Colors.lightBlueAccent,),
+      appBar: AppBar(
+        title: Text('UWI MARKETPLACE'),
+        backgroundColor: Colors.lightBlueAccent,
+      ),
       body: Center(
         child: ListView(
           shrinkWrap: true,
@@ -105,55 +100,125 @@ class _LoginPageState extends State<LoginPage> {
             loginButton,
             Row(
               children: <Widget>[
-                Expanded (
+                Expanded(
                   child: forgotLabel,
                 ),
-                Expanded (
+                Expanded(
                   child: newUserLabel,
                 ),
               ],
-
             )
-
-
           ],
         ),
       ),
     );
-
   }
 
+  //attempts to log in user
   void signIn() async {
-    try{
-      FirebaseUser user = await FirebaseAuth.instance.signInWithEmailAndPassword(email: emailController.text, password: passwordController.text);
-      setUser(user);
-      print('Signed in ${user.email}');
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => NavBar()),
-      );
-    }
-    catch(e){
+    try {
+      FirebaseUser user = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+              email: _emailController.text, password: _passwordController.text);
+      if (user.isEmailVerified) {
+        setUser(user);
+        print('Signed in ${user.email}');
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => NavBar()),
+        );
+      } else {
+        _showEmailVerificationAlert(user);
+      }
+    } catch (e) {
       print('error: $e');
       setUser(null);
-      _showAlert();
+      _showIncorrectAlert();
     }
   }
 
-  void _showAlert(){
-    showDialog(context: context,
-        builder: (BuildContext context){
-          return AlertDialog(
-            title: new Text("Incorrect username / password"),
-            content: new Text("The username or password entered is invalid."),
-            actions: <Widget>[
-              new FlatButton(onPressed: (){Navigator.of(context).pop();}, child: new Text("Try again"))
-            ]
-          );
-        }
-    );
+  //sends a verification email
+  Future sendEmailVerification(FirebaseUser fbuser) async {
+    await fbuser.sendEmailVerification();
   }
 
+  //resets the user password
+  void _resetPassword() {
+    FirebaseAuth.instance
+        .sendPasswordResetEmail(email: _emailController.text)
+        .then((doc) {
+      String title = "Password Reset Email Sent";
+      String myEmail = _emailController.text;
+      String content =
+          "Please check your email: $myEmail and follow the steps to reset your password";
+      _showResetAlert(title, content);
+    }).catchError((err) {
+      String title = "Error Sending Email";
+      String content =
+          "Either no email or an invalid email was entered, please try again.";
+      _showResetAlert(title, content);
+    });
+  }
 
+  //Alert for when the user enters wrong information to log in with
+  void _showIncorrectAlert() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+              title: new Text("Incorrect username / password"),
+              content: new Text("The username or password entered is invalid."),
+              actions: <Widget>[
+                new FlatButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: new Text("Try again"))
+              ]);
+        });
+  }
 
+  //alert for if the user isn't verified
+  void _showEmailVerificationAlert(FirebaseUser fbuser) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+              title: new Text("Account Isn't Verified"),
+              content: new Text(
+                  "Please verify your account using the link that was previously sent to your email. Or you can request a new link from the option below."),
+              actions: <Widget>[
+                new FlatButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: new Text("Close")),
+                new FlatButton(
+                    onPressed: () {
+                      sendEmailVerification(fbuser).then((_) {
+                        Navigator.of(context).pop();
+                      }).catchError((e) {});
+                    },
+                    child: new Text("Request Link"))
+              ]);
+        });
+  }
+
+  //alert for when the user request a password reset
+  void _showResetAlert(String title, String content) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+              title: new Text(title),
+              content: new Text(content),
+              actions: <Widget>[
+                new FlatButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: new Text("Close"))
+              ]);
+        });
+  }
 }
