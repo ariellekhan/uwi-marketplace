@@ -15,5 +15,4 @@ Select Browse repositories, select the Flutter plugin and click Install.
 Click Yes when prompted to install the Dart plugin.
 Click Restart when prompted.
 Open project in Android Studio 
-Run 
 
