@@ -40,11 +40,13 @@ class _FeedState extends State<Feed> {
                     child: CircularProgressIndicator(
                         valueColor: AlwaysStoppedAnimation<Color>(Colors.red)));
               } else {
-                return ListView.builder(
-                  scrollDirection: Axis.vertical,
+                return ListView.separated(
                   itemBuilder: (context, index) =>
-                      buildItem(context, snapshot.data.documents[index]),
+                      buildItemsList(context, snapshot.data.documents[index]),
                   itemCount: snapshot.data.documents.length,
+                  separatorBuilder: (context, index) => Divider(
+                        color: Colors.black,
+                      ),
                 );
               }
             },
@@ -109,11 +111,14 @@ class Search extends SearchDelegate<String> {
               return Text("No Item found");
             }
 
-            return ListView.builder(
-              scrollDirection: Axis.vertical,
+
+            return ListView.separated(
               itemBuilder: (context, index) =>
-                  buildItem(context, results[index]),
+                  buildItemsList(context, results[index]),
               itemCount: results.length,
+              separatorBuilder: (context, index) => Divider(
+                color: Colors.black,
+              ),
             );
           }
         },
@@ -153,12 +158,16 @@ class Search extends SearchDelegate<String> {
               return Text("No Item found");
             }
 
-            return ListView.builder(
-              scrollDirection: Axis.vertical,
+
+            return ListView.separated(
               itemBuilder: (context, index) =>
-                  buildItem(context, results[index]),
+                  buildItemsList(context, results[index]),
               itemCount: results.length,
+              separatorBuilder: (context, index) => Divider(
+                color: Colors.black,
+              ),
             );
+
           }
         },
       ),
@@ -166,54 +175,80 @@ class Search extends SearchDelegate<String> {
   }
 }
 
-Widget buildItem(BuildContext context, DocumentSnapshot document) {
+Widget buildItemsList(BuildContext context, DocumentSnapshot document) {
   _imageUrl = '${document['image']}';
-  return Card(
-    elevation: 8.0,
-    margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
-    child: RaisedButton(
-      color: Colors.white70,
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  new ItemDetails(itemInfo: getItemInfo(document))),
-        );
-      },
-      child: ListTile(
-          contentPadding:
-              EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-          leading: Container(
-            padding: EdgeInsets.only(right: 12.0),
+  return new Row(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: <Widget>[
+      new Container(
+          padding: EdgeInsets.all(4.0),
+          height: 90.0,
+          width: 100.0,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(4.0),
             child: _imageUrl == ""
                 ? Image.asset(
                     'images/placeholder.png',
-                    height: 90.0,
+                    height: 96.0,
                     width: 100.0,
+                    fit: BoxFit.cover,
                   )
                 : Image.network(
                     _imageUrl,
-                    height: 90.0,
+                    height: 96.0,
                     width: 100.0,
+                    fit: BoxFit.cover,
                   ),
-          ),
-          title: Text(
+          )),
+      new SizedBox(
+        width: 8.0,
+      ),
+      new Expanded(
+          child: new Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          new Text(
             '${document['name']}',
-            style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: 18.0),
+            style: new TextStyle(
+                fontSize: 14.0,
+                color: Colors.black87,
+                fontWeight: FontWeight.bold),
           ),
-          subtitle: Row(
+          new Row(
             children: <Widget>[
-              Icon(Icons.attach_money, color: Colors.green),
-              Text('${document['price']}',
-                  style: TextStyle(color: Colors.green))
+              new Icon(Icons.attach_money, color: Colors.green),
+              new Text(
+                '${document['price']}',
+                style: new TextStyle(
+                    fontSize: 16.0,
+                    color: Colors.green,
+                    fontWeight: FontWeight.normal),
+              )
             ],
           ),
-          trailing: Icon(Icons.arrow_right, color: Colors.grey, size: 30.0)),
-    ),
+        ],
+      )),
+      new IconButton(
+        icon: new Icon(
+          Icons.arrow_right,
+          size: 40.0,
+        ),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    new ItemDetails(itemInfo: getItemInfo(document))),
+          );
+        },
+        color: Colors.grey,
+        padding: new EdgeInsets.all(0.0),
+      ),
+      new SizedBox(
+        width: 8.0,
+      ),
+    ],
   );
 }
 

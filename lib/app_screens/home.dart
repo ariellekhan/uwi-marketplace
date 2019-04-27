@@ -381,7 +381,7 @@ class _HomeState extends State<Home> {
           return AlertDialog(
               title: new Text("Help"),
               content: new Text(
-                  "1. To list an item for sale, Navigate to Categories and click on the icon at the top right of the app bar.\n\n2. To Favourite am item, click on the heart icon on the item details page"),
+                  "1. To list an item for sale, Navigate to Categories and click on the icon at the top right of the app bar.\n\n2. To Favourite an item, click on the heart icon on the item details page"),
               actions: <Widget>[
                 new FlatButton(
                     onPressed: () {
