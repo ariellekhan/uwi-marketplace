@@ -10,9 +10,14 @@ It was developed using Google's increasingly popular framework Flutter and SCRUM
 
 ## Running UWI MARKETPLACE 
 Start Android Studio.
+
 Open plugin preferences (Preferences > Plugins on macOS, File > Settings > Plugins on Windows & Linux).
+
 Select Browse repositories, select the Flutter plugin and click Install.
+
 Click Yes when prompted to install the Dart plugin.
+
 Click Restart when prompted.
+
 Open project in Android Studio 
 
