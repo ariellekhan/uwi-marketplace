@@ -1,16 +1,19 @@
 # uwi_marketplace
 
-A new Flutter application.
+UWI marketplace is a cross-platform mobile application that allows students to conviently buy/sell used school items​
 
-## Getting Started
+It solves the problem of sourcing buyers/sellers, provides safety and a tailored experience​
 
-This project is a starting point for a Flutter application.
+It has useful features like a chat, newsfeed, favorites list, and auto-fill for textbooks​
 
-A few resources to get you started if this is your first Flutter project:
+It was developed using Google's increasingly popular framework Flutter and SCRUM methodology ​
 
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
+## Running UWI MARKETPLACE 
+Start Android Studio.
+Open plugin preferences (Preferences > Plugins on macOS, File > Settings > Plugins on Windows & Linux).
+Select Browse repositories, select the Flutter plugin and click Install.
+Click Yes when prompted to install the Dart plugin.
+Click Restart when prompted.
+Open project in Android Studio 
+Run 
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
