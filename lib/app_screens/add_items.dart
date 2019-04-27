@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import "package:image_picker/image_picker.dart";
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:random_string/random_string.dart' as random;
 import '../authentication.dart';
 import 'nav_bar.dart';
 import 'package:ntp/ntp.dart';
@@ -14,10 +13,8 @@ class ItemForm extends StatefulWidget {
   @override
   _ItemFormState createState() => new _ItemFormState();
 }
+
 class _ItemFormState extends State<ItemForm> {
-
-
-
   var _itemTypes = [
     "Type of Item",
     "Text Book",
@@ -31,7 +28,6 @@ class _ItemFormState extends State<ItemForm> {
   var _currentItemSelected = "Type of Item";
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  bool _autoValidate = false;
   String _description;
   String _category = '';
   String _author = '';
@@ -59,7 +55,6 @@ class _ItemFormState extends State<ItemForm> {
         _description = val;
       },
     );
-
 
     final name = TextFormField(
       autofocus: false,
@@ -170,6 +165,7 @@ class _ItemFormState extends State<ItemForm> {
         padding: EdgeInsets.all(12),
         onPressed: () {
           _validateInputs();
+          _showProgress();
           _uploadToFirestore().then((_) {
             _showAlert("Success", "Item was uploaded");
             _itemImage = null;
@@ -276,12 +272,13 @@ class _ItemFormState extends State<ItemForm> {
   }
 
   //adds items collection to firebase
-  void addToDatabase() {
+  Future addToDatabase() async {
     String dateNow = _ntpTime.toString();
 
     String documentID = Firestore.instance //get documentID
         .collection("allItems")
-        .document().documentID;
+        .document()
+        .documentID;
 
     String userID = getUser().uid; //get userID
     String userEmail = getUser().email; //get user email
@@ -299,16 +296,17 @@ class _ItemFormState extends State<ItemForm> {
       'productID': documentID,
       'sellerID': userID,
       'sellerEmail': userEmail,
-      'status': 'unsold',};
+      'status': 'unsold',
+    };
 
     //add to allItems
-    Firestore.instance
+    await Firestore.instance
         .collection("allItems")
         .document(documentID)
         .setData(productData);
 
     //add to addItems
-    Firestore.instance
+    await Firestore.instance
         .collection("items")
         .document("addItems")
         .collection(_category)
@@ -316,25 +314,18 @@ class _ItemFormState extends State<ItemForm> {
         .setData(productData);
 
     //adds to userItems
-    Firestore.instance
+    await Firestore.instance
         .collection("users")
         .document(userEmail)
         .collection("myItems")
         .document(documentID)
         .setData(productData);
-
   }
-
 
   void _validateInputs() {
     if (_formKey.currentState.validate()) {
 //    If all data are correct then save data to out variables
       _formKey.currentState.save();
-    } else {
-//    If all data are not valid then start auto validation.
-      setState(() {
-        _autoValidate = true;
-      });
     }
   } // _validateInputs
 
@@ -375,6 +366,7 @@ class _ItemFormState extends State<ItemForm> {
   }
 
   void _showAlert(String _t, String _c) {
+    Navigator.pop(context);
     _itemImage = null;
     _imageUrl = "";
     showDialog(
@@ -399,31 +391,37 @@ class _ItemFormState extends State<ItemForm> {
         });
   }
 
+  Future _showProgress() async {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: new Text("Uploading Item"),
+            content: new LinearProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.red)),
+          );
+        });
+  }
+
   Future _uploadToFirestore() async {
     if (_itemImage != null) {
       String imageName = DateTime.now().millisecondsSinceEpoch.toString();
-      await addImageToFirebase(imageName, _itemImage).then((_) {
-
-        _updateTime().then((_) {
-          addToDatabase();
+      await addImageToFirebase(imageName, _itemImage).then((_) async {
+        await _updateTime().then((_) async {
+          await addToDatabase();
         }).catchError((e) {});
-
-
-
       }).catchError((e) {});
     } else {
       _imageUrl = "";
-      _updateTime().then((_) {
-        addToDatabase();
+      await _updateTime().then((_) async {
+        await addToDatabase();
       }).catchError((e) {});
-
     }
   }
 
-
   Future _updateTime() async {
     _currentTime = DateTime.now();
-   await NTP.getNtpOffset().then((value) {
+    await NTP.getNtpOffset().then((value) {
       setState(() {
         _ntpOffset = value;
         _ntpTime = _currentTime.add(Duration(milliseconds: _ntpOffset));
@@ -431,6 +429,3 @@ class _ItemFormState extends State<ItemForm> {
     });
   }
 }
-
-
-
