@@ -139,6 +139,7 @@ class _ProfileState extends State<Profile> {
 
   Future <LoginPage> _signOut()  async{
     await FirebaseAuth.instance.signOut();
+    setUser(null);
     runApp(
         new MaterialApp(
           home: new LoginPage(),
