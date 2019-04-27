@@ -36,7 +36,7 @@ class _FeedState extends State<Feed> {
           body: new StreamBuilder<QuerySnapshot>(
 
 
-        stream: Firestore.instance.collection('allItems').orderBy("date", descending: true).snapshots(),
+        stream: Firestore.instance.collection('allItems').orderBy("date", descending: false).snapshots(),
             builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (!snapshot.hasData) {
                 return Center(
@@ -125,7 +125,7 @@ class Search extends SearchDelegate<String> {
     return Container(
       color: Colors.white,
       child: new  StreamBuilder<QuerySnapshot>(
-        stream: Firestore.instance.collection('allItems').orderBy("date", descending: true).snapshots(),
+        stream: Firestore.instance.collection('allItems').orderBy("date", descending: false).snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if(query.isEmpty){
             return Container();

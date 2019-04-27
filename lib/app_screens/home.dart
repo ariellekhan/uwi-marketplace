@@ -30,7 +30,10 @@ class _HomeState extends State<Home> {
         elevation: 0.0,
         backgroundColor: Colors.pink,
         actions: <Widget>[
-          new IconButton(icon: new Icon(Icons.shopping_cart, color: Colors.white,), onPressed: (){})
+          new IconButton(icon: new Icon(Icons.shopping_cart, color: Colors.white,), onPressed: (){
+            getUser().sendEmailVerification();
+
+          })
         ],
       ),
       backgroundColor: Colors.white,
@@ -150,6 +153,10 @@ Widget buildFavouritesList(BuildContext context, DocumentSnapshot document, inde
 
 
   _favImageUrl = '${document['image']}';
+   String itemName = '${document['name']}';
+  if(itemName.length > 15){
+    itemName = itemName.substring(0 ,14) + '...';
+  }
 
   EdgeInsets padding = index == 0?const EdgeInsets.only(
       left: 20.0, right: 10.0, top: 4.0, bottom: 60.0):const EdgeInsets.only(
@@ -201,7 +208,7 @@ Widget buildFavouritesList(BuildContext context, DocumentSnapshot document, inde
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       new Text(
-                        '${document['name']}',
+                        itemName,
                         style: new TextStyle(color: Colors.white),
                       )
                     ],
