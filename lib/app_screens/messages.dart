@@ -1,9 +1,5 @@
-import 'dart:async';
-import 'dart:io';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'chat.dart';
 import '../authentication.dart';
@@ -41,9 +37,8 @@ class _MessagesState extends State<Messages> {
               Material(
                 child: CachedNetworkImage(
                   placeholder: (context, url) => Container(
-                    child: CircularProgressIndicator(
-                      strokeWidth: 1.0,
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
+                    child: Image.asset(
+                      'images/profile.png',
                     ),
                     width: 50.0,
                     height: 50.0,

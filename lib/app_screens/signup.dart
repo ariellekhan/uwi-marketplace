@@ -214,6 +214,7 @@ class _SignUpState extends State<SignUp> {
     if (_formKey.currentState.validate()) {
 //    If all data are correct then save data to out variables
       _formKey.currentState.save();
+      _showProgress();
       await _createAccount(); //creates a firebase account
     }
   } // _validateInputs
@@ -311,6 +312,7 @@ class _SignUpState extends State<SignUp> {
 
   //pop up alert
   void _showAlert(String title, String content, bool isSuccess) {
+    Navigator.pop(context);
     showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -332,6 +334,18 @@ class _SignUpState extends State<SignUp> {
                 child: new Text("close"),
               )
             ],
+          );
+        });
+  }
+
+  Future _showProgress() async {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: new Text("Creating User"),
+            content: new LinearProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.red)),
           );
         });
   }

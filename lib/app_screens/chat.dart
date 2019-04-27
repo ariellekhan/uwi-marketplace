@@ -248,10 +248,8 @@ class ChatScreenState extends State<ChatScreen> {
                     ? Material(
                         child: CachedNetworkImage(
                           placeholder: (context, url) => Container(
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 1.0,
-                                  valueColor:
-                                      AlwaysStoppedAnimation<Color>(Colors.red),
+                                child:  Image.asset(
+                                  'images/profile.png',
                                 ),
                                 width: 35.0,
                                 height: 35.0,
@@ -303,7 +301,7 @@ class ChatScreenState extends State<ChatScreen> {
                                     ),
                                 errorWidget: (context, url, error) => Material(
                                       child: Image.asset(
-                                        'images/img_not_available.jpeg',
+                                        'images/profile.png',
                                         width: 200.0,
                                         height: 200.0,
                                         fit: BoxFit.cover,
@@ -326,7 +324,7 @@ class ChatScreenState extends State<ChatScreen> {
                           )
                         : Container(
                             child: new Image.asset(
-                              'images/${document['content']}.gif',
+                              'images/profile.png',
                               width: 100.0,
                               height: 100.0,
                               fit: BoxFit.cover,

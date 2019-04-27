@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'login.dart';
-import 'my_items.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../authentication.dart';
 
@@ -120,26 +119,6 @@ class _ProfileState extends State<Profile> {
         child: Text('Log Out', style: TextStyle(color: Colors.white)),
       ),
     );
-
-//    final listedItemsButton = Padding(
-//      padding: EdgeInsets.symmetric(vertical: 16.0),
-//      child: RaisedButton(
-//        shape: RoundedRectangleBorder(
-//          borderRadius: BorderRadius.circular(50),
-//        ),
-//        onPressed: () {
-//          // ADD LOGIC - change
-//          // Navigator.of(context).pushNamed(Categories.tag);
-//          Navigator.push(
-//            context,
-//            MaterialPageRoute(builder: (context) => MyItems()), // CHANGE
-//          );
-//        },
-//        padding: EdgeInsets.all(12),
-//        color: Colors.blue,
-//        child: Text('My Items', style: TextStyle(color: Colors.white)),
-//      ),
-//    );
 
     return Center(
       child: ListView(
