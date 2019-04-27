@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../item_information.dart';
 import 'chat.dart';
 import '../authentication.dart';
-import '../user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ItemDetails extends StatefulWidget{

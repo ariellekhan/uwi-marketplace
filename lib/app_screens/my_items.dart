@@ -58,14 +58,6 @@ class _MyItemsState extends State<MyItems> {
     margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
     child: RaisedButton(
     color: Color.fromRGBO(64, 75, 96, .9),
-   /* onPressed: () {
-    // ADD LOGIC
-    ItemInfo itemInfo;
-    Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => new ItemDetails(itemInfo: getItemInfo(document))),
-    )
-    }, */
     child:    ListTile(
     contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
     leading: Container(
@@ -86,8 +78,6 @@ class _MyItemsState extends State<MyItems> {
           new IconButton(
             icon: new Icon(Icons.arrow_forward),
             onPressed: () {
-              // ADD LOGIC
-              ItemInfo itemInfo;
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => new ItemDetails(itemInfo: getItemInfo(document))),

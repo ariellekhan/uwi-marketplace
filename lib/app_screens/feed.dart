@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'item_details.dart';
 import '../item_information.dart';
 
-class Feed extends StatefulWidget{
-
+class Feed extends StatefulWidget {
   @override
   _FeedState createState() => new _FeedState();
 }
@@ -12,65 +11,57 @@ class Feed extends StatefulWidget{
 String _imageUrl = "";
 
 class _FeedState extends State<Feed> {
-
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: new Scaffold(appBar: new AppBar(
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.search),
-              onPressed: () {
-                showSearch(context: context, delegate: Search());
-
-              },
-            ),
-          ],
-
-          title: new Text("Search Feed"), backgroundColor: Colors.orange,) ,
-
-          // backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
-
-
+        home: new Scaffold(
+          appBar: new AppBar(
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(Icons.search),
+                onPressed: () {
+                  showSearch(context: context, delegate: Search());
+                },
+              ),
+            ],
+            title: new Text("Search Feed"),
+            backgroundColor: Colors.orange,
+          ),
           body: new StreamBuilder<QuerySnapshot>(
-
-
-        stream: Firestore.instance.collection('allItems').orderBy("date", descending: false).snapshots(),
-            builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            stream: Firestore.instance
+                .collection('allItems')
+                .orderBy("date", descending: true)
+                .snapshots(),
+            builder:
+                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (!snapshot.hasData) {
                 return Center(
                     child: CircularProgressIndicator(
                         valueColor: AlwaysStoppedAnimation<Color>(Colors.red)));
-              }
-              else {
+              } else {
                 return ListView.builder(
                   scrollDirection: Axis.vertical,
                   itemBuilder: (context, index) =>
                       buildItem(context, snapshot.data.documents[index]),
                   itemCount: snapshot.data.documents.length,
-
                 );
               }
             },
           ),
-        )
-
-    );
+        ));
   }
-
-
 }
-
-
 
 class Search extends SearchDelegate<String> {
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
-      IconButton(icon: Icon(Icons.clear), onPressed: () {
-        query = "";
-      })
+      IconButton(
+          icon: Icon(Icons.clear),
+          onPressed: () {
+            query = "";
+          })
     ];
   }
 
@@ -79,10 +70,10 @@ class Search extends SearchDelegate<String> {
     return IconButton(
         icon: AnimatedIcon(
           icon: AnimatedIcons.menu_arrow,
-          progress: transitionAnimation,),
+          progress: transitionAnimation,
+        ),
         onPressed: () {
           close(context, null);
-
         });
   }
 
@@ -90,54 +81,31 @@ class Search extends SearchDelegate<String> {
   Widget buildResults(BuildContext context) {
     return Container(
       color: Colors.white,
-      child: new  StreamBuilder<QuerySnapshot>(
-    stream: Firestore.instance.collection('allItems').orderBy("date", descending: true).snapshots(),
-    builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-    if(query.isEmpty){
-    return Container();
-    }
-    else if (!snapshot.hasData) {
-    return Center(
-    child: CircularProgressIndicator(
-    valueColor: AlwaysStoppedAnimation<Color>(Colors.red)));
-    }
-    else {
-    final results = snapshot.data.documents.where((doc) => doc["price"].toString().toLowerCase().contains(query.toLowerCase()) || doc["name"].toString().toLowerCase().contains(query.toLowerCase()) ).toList();
-    if(results.length <=0){
-    return Text("No Item found");
-    }
-
-    return ListView.builder(
-    scrollDirection: Axis.vertical,
-    itemBuilder: (context, index) =>
-    buildItem(context, results[index]),
-    itemCount: results.length,
-
-    );
-    }
-    },
-    ),
-    );
-  }
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: new  StreamBuilder<QuerySnapshot>(
-        stream: Firestore.instance.collection('allItems').orderBy("date", descending: false).snapshots(),
+      child: new StreamBuilder<QuerySnapshot>(
+        stream: Firestore.instance
+            .collection('allItems')
+            .orderBy("date", descending: true)
+            .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if(query.isEmpty){
+          if (query.isEmpty) {
             return Container();
-          }
-          else if (!snapshot.hasData) {
+          } else if (!snapshot.hasData) {
             return Center(
                 child: CircularProgressIndicator(
                     valueColor: AlwaysStoppedAnimation<Color>(Colors.red)));
-          }
-          else {
-            final results = snapshot.data.documents.where((doc) => doc["price"].toString().toLowerCase().contains(query.toLowerCase()) || doc["name"].toString().toLowerCase().contains(query.toLowerCase()) ).toList();
-            if(results.length <=0){
+          } else {
+            final results = snapshot.data.documents
+                .where((doc) =>
+                    doc["price"]
+                        .toString()
+                        .toLowerCase()
+                        .contains(query.toLowerCase()) ||
+                    doc["name"]
+                        .toString()
+                        .toLowerCase()
+                        .contains(query.toLowerCase()))
+                .toList();
+            if (results.length <= 0) {
               return Text("No Item found");
             }
 
@@ -146,7 +114,6 @@ class Search extends SearchDelegate<String> {
               itemBuilder: (context, index) =>
                   buildItem(context, results[index]),
               itemCount: results.length,
-
             );
           }
         },
@@ -154,55 +121,116 @@ class Search extends SearchDelegate<String> {
     );
   }
 
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      child: new StreamBuilder<QuerySnapshot>(
+        stream: Firestore.instance
+            .collection('allItems')
+            .orderBy("date", descending: false)
+            .snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (query.isEmpty) {
+            return Container();
+          } else if (!snapshot.hasData) {
+            return Center(
+                child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.red)));
+          } else {
+            final results = snapshot.data.documents
+                .where((doc) =>
+                    doc["price"]
+                        .toString()
+                        .toLowerCase()
+                        .contains(query.toLowerCase()) ||
+                    doc["name"]
+                        .toString()
+                        .toLowerCase()
+                        .contains(query.toLowerCase()))
+                .toList();
+            if (results.length <= 0) {
+              return Text("No Item found");
+            }
 
-
+            return ListView.builder(
+              scrollDirection: Axis.vertical,
+              itemBuilder: (context, index) =>
+                  buildItem(context, results[index]),
+              itemCount: results.length,
+            );
+          }
+        },
+      ),
+    );
+  }
 }
 
-
-Widget buildItem(BuildContext context, DocumentSnapshot document){
+Widget buildItem(BuildContext context, DocumentSnapshot document) {
   _imageUrl = '${document['image']}';
   return Card(
     elevation: 8.0,
     margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
     child: RaisedButton(
-      // color: Color.fromRGBO(64, 75, 96, .9),
       color: Colors.white70,
       onPressed: () {
-        // ADD LOGIC
-        ItemInfo itemInfo;
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => new ItemDetails(itemInfo: getItemInfo(document))),
+          MaterialPageRoute(
+              builder: (context) =>
+                  new ItemDetails(itemInfo: getItemInfo(document))),
         );
       },
-      child:    ListTile(
-          contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+      child: ListTile(
+          contentPadding:
+              EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
           leading: Container(
             padding: EdgeInsets.only(right: 12.0),
-
-            child:_imageUrl == "" ? Image.asset('images/placeholder.png', height: 90.0,width: 100.0,)
-                :Image.network(_imageUrl,height: 90.0, width: 100.0,),
+            child: _imageUrl == ""
+                ? Image.asset(
+                    'images/placeholder.png',
+                    height: 90.0,
+                    width: 100.0,
+                  )
+                : Image.network(
+                    _imageUrl,
+                    height: 90.0,
+                    width: 100.0,
+                  ),
           ),
           title: Text(
             '${document['name']}',
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18.0),
+            style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 18.0),
           ),
-
           subtitle: Row(
             children: <Widget>[
               Icon(Icons.attach_money, color: Colors.green),
-              Text('${document['price']}', style: TextStyle(color: Colors.green))
+              Text('${document['price']}',
+                  style: TextStyle(color: Colors.green))
             ],
           ),
-          trailing:
-          Icon(Icons.arrow_right, color: Colors.grey, size: 30.0)),
+          trailing: Icon(Icons.arrow_right, color: Colors.grey, size: 30.0)),
     ),
   );
-
 }
 
-
-ItemInfo getItemInfo(DocumentSnapshot document){
-  ItemInfo itemInfo = new ItemInfo('${document['name']}','${document['description']}', '${document['address']}', '${document['author']}', '${document['degree']}', '${document['image']}', '${document['price']}', '${document['category']}', '${document['productID']}',  '${document['sellerEmail']}','${document['sellerID']}', '${document['status']}', '${document['date']}');
+ItemInfo getItemInfo(DocumentSnapshot document) {
+  ItemInfo itemInfo = new ItemInfo(
+      '${document['name']}',
+      '${document['description']}',
+      '${document['address']}',
+      '${document['author']}',
+      '${document['degree']}',
+      '${document['image']}',
+      '${document['price']}',
+      '${document['category']}',
+      '${document['productID']}',
+      '${document['sellerEmail']}',
+      '${document['sellerID']}',
+      '${document['status']}',
+      '${document['date']}');
   return itemInfo;
 }
