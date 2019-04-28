@@ -248,8 +248,8 @@ class _SignUpState extends State<SignUp> {
   //uploads data to the firestore
   Future _uploadToFirestore() async {
     if (_userImage != null) {
-      addImageToFirebase(random.randomString(10), _userImage).then((_) {
-        addToDatabase();
+      addImageToFirebase(DateTime.now().millisecondsSinceEpoch.toString(), _userImage).then((_) async{
+        await addToDatabase();
       }).catchError((e) {});
     } else {
       _imageUrl = "";

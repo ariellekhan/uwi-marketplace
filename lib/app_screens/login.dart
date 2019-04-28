@@ -123,10 +123,7 @@ class _LoginPageState extends State<LoginPage> {
       if (user.isEmailVerified) {
         setUser(user);
         print('Signed in ${user.email}');
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => NavBar()),
-        );
+        Navigator.of(context).pushReplacement(new MaterialPageRoute(builder: (BuildContext context) => new NavBar()));
       } else {
         _showEmailVerificationAlert(user);
       }
