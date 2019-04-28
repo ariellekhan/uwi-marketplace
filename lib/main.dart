@@ -17,7 +17,7 @@ void main() {
 class MyApp extends StatelessWidget {
   static FirebaseAnalytics analytics = FirebaseAnalytics();
   static FirebaseAnalyticsObserver observer =
-      FirebaseAnalyticsObserver(analytics: analytics);
+  FirebaseAnalyticsObserver(analytics: analytics);
   final routes = <String, WidgetBuilder>{
     LoginPage.tag: (context) => LoginPage(),
     SignUp.tag: (context) => SignUp(),
