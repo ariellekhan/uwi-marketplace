@@ -137,10 +137,7 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  //sends a verification email
-  Future sendEmailVerification(FirebaseUser fbuser) async {
-    await fbuser.sendEmailVerification();
-  }
+
 
   //resets the user password
   void _resetPassword() {
@@ -195,9 +192,8 @@ class _LoginPageState extends State<LoginPage> {
                     child: new Text("Close")),
                 new FlatButton(
                     onPressed: () {
-                      sendEmailVerification(fbuser).then((_) {
-                        Navigator.of(context).pop();
-                      }).catchError((e) {});
+                      fbuser.sendEmailVerification();
+                      Navigator.of(context).pop();
                     },
                     child: new Text("Request Link"))
               ]);

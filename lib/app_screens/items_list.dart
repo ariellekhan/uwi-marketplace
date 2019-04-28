@@ -69,13 +69,13 @@ class _AllItemsState extends State<AllItems>{
                       valueColor: AlwaysStoppedAnimation<Color>(Colors.red)));
             }
             else {
-              return ListView.builder(
-
-                scrollDirection: Axis.vertical,
+              return ListView.separated(
                 itemBuilder: (context, index) =>
-                    buildItem(context, snapshot.data.documents[index]),
+                    buildItemsList(context, snapshot.data.documents[index]),
                 itemCount: snapshot.data.documents.length,
-
+                separatorBuilder: (context, index) => Divider(
+                  color: Colors.black,
+                ),
               );
             }
           },
@@ -99,51 +99,83 @@ ItemInfo getItemInfo(DocumentSnapshot document){
 }
 
 
-Widget buildItem(BuildContext context, DocumentSnapshot document){
-  if(document == null){
-    return Container();
-  }
+Widget buildItemsList(BuildContext context, DocumentSnapshot document) {
   _imageUrl = '${document['image']}';
-  return Card(
-    elevation: 8.0,
-    margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
-    child: RaisedButton(
-      // color: Color.fromRGBO(64, 75, 96, .9),
-      color: Colors.white70,
-      onPressed: () {
-        // ADD LOGIC
-        ItemInfo itemInfo;
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => new ItemDetails(itemInfo: getItemInfo(document))),
-        );
-      },
-      child:    ListTile(
-          contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-          leading: Container(
-            padding: EdgeInsets.only(right: 12.0),
-
-            child:_imageUrl == "" ? Image.asset('images/placeholder.png', height: 90.0,width: 100.0,)
-                :Image.network(_imageUrl,height: 90.0, width: 100.0,),
-          ),
-          title: Text(
-            '${document['name']}',
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18.0),
-          ),
-
-          subtitle: Row(
+  return new Row(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: <Widget>[
+      new Container(
+          padding: EdgeInsets.all(4.0),
+          height: 90.0,
+          width: 100.0,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(4.0),
+            child: _imageUrl == ""
+                ? Image.asset(
+              'images/placeholder.png',
+              height: 96.0,
+              width: 100.0,
+              fit: BoxFit.cover,
+            )
+                : Image.network(
+              _imageUrl,
+              height: 96.0,
+              width: 100.0,
+              fit: BoxFit.cover,
+            ),
+          )),
+      new SizedBox(
+        width: 8.0,
+      ),
+      new Expanded(
+          child: new Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Icon(Icons.attach_money, color: Colors.green),
-              Text('${document['price']}', style: TextStyle(color: Colors.green))
+              new Text(
+                '${document['name']}',
+                style: new TextStyle(
+                    fontSize: 14.0,
+                    color: Colors.black87,
+                    fontWeight: FontWeight.bold),
+              ),
+              new Row(
+                children: <Widget>[
+                  new Icon(Icons.attach_money, color: Colors.green),
+                  new Text(
+                    '${document['price']}',
+                    style: new TextStyle(
+                        fontSize: 16.0,
+                        color: Colors.green,
+                        fontWeight: FontWeight.normal),
+                  )
+                ],
+              ),
             ],
-          ),
-          trailing:
-          Icon(Icons.arrow_right, color: Colors.grey, size: 30.0)),
-    ),
+          )),
+      new IconButton(
+        icon: new Icon(
+          Icons.arrow_right,
+          size: 40.0,
+        ),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                new ItemDetails(itemInfo: getItemInfo(document))),
+          );
+        },
+        color: Colors.grey,
+        padding: new EdgeInsets.all(0.0),
+      ),
+      new SizedBox(
+        width: 8.0,
+      ),
+    ],
   );
-
-
 }
+
 class Search extends SearchDelegate<String> {
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -169,7 +201,7 @@ class Search extends SearchDelegate<String> {
   @override
   Widget buildResults(BuildContext context) {
     return Container(
-      color: Colors.black38,
+      color: Colors.white,
       child: new StreamBuilder<QuerySnapshot>(
         stream: Firestore.instance.collection('items').document('addItems').collection(_category).snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -187,12 +219,14 @@ class Search extends SearchDelegate<String> {
               return Text("No Item found");
             }
 
-            return ListView.builder(
-              scrollDirection: Axis.vertical,
-              itemBuilder: (context, index) =>
-                  buildItem(context, results[index]),
-              itemCount: results.length,
 
+            return ListView.separated(
+              itemBuilder: (context, index) =>
+                  buildItemsList(context, results[index]),
+              itemCount: results.length,
+              separatorBuilder: (context, index) => Divider(
+                color: Colors.black,
+              ),
             );
           }
         },
@@ -203,7 +237,7 @@ class Search extends SearchDelegate<String> {
   @override
   Widget buildSuggestions(BuildContext context) {
     return Container(
-      color: Colors.black38,
+      color: Colors.white,
       child: new StreamBuilder<QuerySnapshot>(
         stream: Firestore.instance.collection('items').document('addItems').collection(_category).snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -221,12 +255,14 @@ class Search extends SearchDelegate<String> {
               return Text("No Item found");
             }
 
-            return ListView.builder(
-              scrollDirection: Axis.vertical,
-              itemBuilder: (context, index) =>
-                  buildItem(context, results[index]),
-              itemCount: results.length,
 
+            return ListView.separated(
+              itemBuilder: (context, index) =>
+                  buildItemsList(context, results[index]),
+              itemCount: results.length,
+              separatorBuilder: (context, index) => Divider(
+                color: Colors.black,
+              ),
             );
           }
         },

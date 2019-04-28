@@ -229,7 +229,7 @@ class _SignUpState extends State<SignUp> {
       fbuser.sendEmailVerification(); //sends verification email
       //Add user info to firebase
       await _uploadToFirestore().then((_) {
-        _showAlert("User Created", "Sign up Successful", true);
+        _showAlert("User Created", "Sign up Successful. Please check your email for verification link.", true);
       }).catchError((e) {});
     } catch (e) {
       if (e.toString().contains("ERROR_EMAIL_ALREADY_IN_USE")) {

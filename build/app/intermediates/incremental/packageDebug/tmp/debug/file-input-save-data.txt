@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Sat Apr 27 11:12:52 PDT 2019
+#Sat Apr 27 18:18:07 PDT 2019
 4.path=flutter_assets/images/placeholder.png
 13.baseType=DIRECTORY
 8.set=ASSET
@@ -43,7 +43,7 @@
 9.path=flutter_assets/vm_snapshot_data
 6.set=ASSET
 2.base=C\:\\Users\\phire\\AndroidStudioProjects3\\uwi-marketplace\\build\\app\\intermediates\\transforms\\dexMerger\\debug\\0
-13.path=lib/armeabi-v7a/libflutter.so
+13.path=lib/arm64-v8a/libflutter.so
 11.baseType=DIRECTORY
 4.base=C\:\\Users\\phire\\AndroidStudioProjects3\\uwi-marketplace\\build\\app\\intermediates\\merged_assets\\debug\\mergeDebugAssets\\out
 15.path=flutter_assets/fonts/MaterialIcons-Regular.ttf

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'login.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../authentication.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -107,12 +108,7 @@ class _ProfileState extends State<Profile> {
           borderRadius: BorderRadius.circular(50),
         ),
         onPressed: () {
-          // ADD LOGIC - change
-          // Navigator.of(context).pushNamed(Categories.tag);
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => LoginPage()),
-          );
+          _signOut();
         },
         padding: EdgeInsets.all(12),
         color: Colors.green,
@@ -138,6 +134,16 @@ class _ProfileState extends State<Profile> {
           logoutButton,
         ],
       ),
+    );
+  }
+
+  Future <LoginPage> _signOut()  async{
+    await FirebaseAuth.instance.signOut();
+    runApp(
+        new MaterialApp(
+          home: new LoginPage(),
+        )
+
     );
   }
 }
