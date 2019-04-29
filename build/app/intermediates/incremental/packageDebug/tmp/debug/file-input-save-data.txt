@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Sun Apr 28 21:13:44 PDT 2019
+#Sun Apr 28 22:14:42 PDT 2019
 4.path=flutter_assets/images/placeholder.png
 13.baseType=DIRECTORY
 8.set=ASSET
