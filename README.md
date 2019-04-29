@@ -8,7 +8,7 @@ It has useful features like a chat, newsfeed, favorites list, and auto-fill for 
 
 It was developed using Google's increasingly popular framework Flutter and SCRUM methodology ​
 
-## Running UWI MARKETPLACE 
+## Running UWI MARKETPLACE code
 1. Using Android Studio.
 
 2. Open plugin preferences (Preferences > Plugins on macOS, File > Settings > Plugins on Windows & Linux).
@@ -25,3 +25,6 @@ It was developed using Google's increasingly popular framework Flutter and SCRUM
 
 8. Run main.dart on Android device
 
+
+## APK file
+For instant use of app on an Android device, simply download the apk from this dropbox link: https://www.dropbox.com/sh/irio1mild72eoip/AACFIq3f6AFiMqBLvLHmVIDRa?dl=0
