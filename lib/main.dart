@@ -3,6 +3,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import './app_screens/login.dart';
 import './app_screens/signup.dart';
+import './app_screens/profile.dart';
 import 'package:flutter/services.dart';
 
 void main() {
@@ -17,8 +18,8 @@ class MyApp extends StatelessWidget {
   static FirebaseAnalyticsObserver observer =
       FirebaseAnalyticsObserver(analytics: analytics);
   final routes = <String, WidgetBuilder>{
-    LoginPage.tag: (context) => LoginPage(),
     SignUp.tag: (context) => SignUp(),
+    "/profile": (context) => Profile(),
   };
 
   @override
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
       ),
       navigatorObservers: <NavigatorObserver>[observer],
       home: LoginPage(),
+      initialRoute: "/",
       routes: routes,
     );
   }

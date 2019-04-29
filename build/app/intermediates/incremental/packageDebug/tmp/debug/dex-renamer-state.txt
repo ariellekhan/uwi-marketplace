@@ -1,10 +1,10 @@
-#Sun Apr 28 22:14:37 PDT 2019
+#Mon Apr 29 00:38:12 PDT 2019
 path.2=classes3.dex
 path.1=classes2.dex
 path.0=classes.dex
 renamed.2=classes3.dex
 renamed.1=classes2.dex
 renamed.0=classes.dex
-base.2=C\:\\Users\\phire\\AndroidStudioProjects3\\uwi-marketplace\\build\\app\\intermediates\\transforms\\dexMerger\\debug\\0
-base.1=C\:\\Users\\phire\\AndroidStudioProjects3\\uwi-marketplace\\build\\app\\intermediates\\transforms\\dexMerger\\debug\\0
-base.0=C\:\\Users\\phire\\AndroidStudioProjects3\\uwi-marketplace\\build\\app\\intermediates\\transforms\\dexMerger\\debug\\0
+base.2=C\:\\Users\\phire\\AndroidStudioProjectsFinal\\uwi-marketplace\\build\\app\\intermediates\\transforms\\dexMerger\\debug\\0
+base.1=C\:\\Users\\phire\\AndroidStudioProjectsFinal\\uwi-marketplace\\build\\app\\intermediates\\transforms\\dexMerger\\debug\\0
+base.0=C\:\\Users\\phire\\AndroidStudioProjectsFinal\\uwi-marketplace\\build\\app\\intermediates\\transforms\\dexMerger\\debug\\0
