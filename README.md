@@ -21,7 +21,7 @@ It was developed using Google's increasingly popular framework Flutter and SCRUM
 
 6. Import project from github using this link: https://github.com/ariellekhan/uwi-marketplace
 
-7. Flutter-get Dependicies
+7. Flutter-get dependencies
 
 8. Run main.dart on Android device
 
