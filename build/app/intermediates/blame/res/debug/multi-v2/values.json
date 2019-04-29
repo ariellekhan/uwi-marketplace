@@ -1,8 +1,44 @@
 {
     "logs": [
         {
-            "outputFile": "C:\\Users\\phire\\AndroidStudioProjects3\\uwi-marketplace\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
+            "outputFile": "C:\\Users\\phire\\AndroidStudioProjectsFinal\\uwi-marketplace\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
             "map": [
+                {
+                    "source": "C:\\Users\\phire\\AndroidStudioProjectsFinal\\uwi-marketplace\\build\\app\\generated\\res\\google-services\\debug\\values\\values.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,199,307,389,493,596,716,813",
+                        "endColumns": "143,107,81,103,102,119,96,73",
+                        "endOffsets": "194,302,384,488,591,711,808,882"
+                    },
+                    "to": {
+                        "startLines": "332,333,334,336,337,338,339,340",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "19990,20134,20242,20406,20510,20613,20733,20830",
+                        "endColumns": "143,107,81,103,102,119,96,73",
+                        "endOffsets": "20129,20237,20319,20505,20608,20728,20825,20899"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\phire\\AndroidStudioProjectsFinal\\uwi-marketplace\\android\\app\\src\\main\\res\\values\\styles.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "57",
+                        "endLines": "6",
+                        "endColumns": "12",
+                        "endOffsets": "353"
+                    },
+                    "to": {
+                        "startLines": "342",
+                        "startColumns": "4",
+                        "startOffsets": "20975",
+                        "endLines": "346",
+                        "endColumns": "12",
+                        "endOffsets": "21267"
+                    }
+                },
                 {
                     "source": "C:\\Users\\phire\\.gradle\\caches\\transforms-1\\files-1.1\\jetified-play-services-base-16.0.1.aar\\4dc7ec3027a4aa9b70c901ec273bdac2\\res\\values\\values.xml",
                     "from": {
@@ -54,42 +90,6 @@
                         "startOffsets": "20324",
                         "endColumns": "81",
                         "endOffsets": "20401"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\phire\\AndroidStudioProjects3\\uwi-marketplace\\android\\app\\src\\main\\res\\values\\styles.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "57",
-                        "endLines": "6",
-                        "endColumns": "12",
-                        "endOffsets": "353"
-                    },
-                    "to": {
-                        "startLines": "342",
-                        "startColumns": "4",
-                        "startOffsets": "20975",
-                        "endLines": "346",
-                        "endColumns": "12",
-                        "endOffsets": "21267"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\phire\\AndroidStudioProjects3\\uwi-marketplace\\build\\app\\generated\\res\\google-services\\debug\\values\\values.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,199,307,389,493,596,716,813",
-                        "endColumns": "143,107,81,103,102,119,96,73",
-                        "endOffsets": "194,302,384,488,591,711,808,882"
-                    },
-                    "to": {
-                        "startLines": "332,333,334,336,337,338,339,340",
-                        "startColumns": "4,4,4,4,4,4,4,4",
-                        "startOffsets": "19990,20134,20242,20406,20510,20613,20733,20830",
-                        "endColumns": "143,107,81,103,102,119,96,73",
-                        "endOffsets": "20129,20237,20319,20505,20608,20728,20825,20899"
                     }
                 },
                 {
