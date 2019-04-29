@@ -17,11 +17,10 @@ Future<FirebaseUser> handleSignIn(email, password) async {
   return user;
 }
 
-
-void setUser(FirebaseUser user){
+void setUser(FirebaseUser user) {
   _appUser = user;
 }
 
-FirebaseUser getUser(){
+FirebaseUser getUser() {
   return _appUser;
 }

@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'chat.dart';
 import '../authentication.dart';
 
-
-class Messages extends StatefulWidget{
-
+class Messages extends StatefulWidget {
   @override
   _MessagesState createState() => new _MessagesState();
 }
@@ -16,7 +14,68 @@ class _MessagesState extends State<Messages> {
 
   bool isLoading = false;
 
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: new Container(),
+        title: Text(
+          'Messages',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+        // centerTitle: true,
+        backgroundColor: Colors.lightBlueAccent,
+      ),
+      body: WillPopScope(
+        child: Stack(
+          children: <Widget>[
+            // List
+            Container(
+              child: StreamBuilder(
+                stream: Firestore.instance
+                    .collection('users')
+                    .document(getUser().email)
+                    .collection("myChats")
+                    .orderBy('timestamp', descending: true)
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
+                      ),
+                    );
+                  } else {
+                    return ListView.builder(
+                      padding: EdgeInsets.all(10.0),
+                      itemBuilder: (context, index) =>
+                          buildItem(context, snapshot.data.documents[index]),
+                      itemCount: snapshot.data.documents.length,
+                    );
+                  }
+                },
+              ),
+            ),
 
+            // Loading
+            Positioned(
+              child: isLoading
+                  ? Container(
+                      child: Center(
+                        child: CircularProgressIndicator(
+                            valueColor:
+                                AlwaysStoppedAnimation<Color>(Colors.red)),
+                      ),
+                      color: Colors.white.withOpacity(0.8),
+                    )
+                  : Container(),
+            )
+          ],
+        ),
+      ),
+    );
+  }
 
   Widget buildItem(BuildContext context, DocumentSnapshot document) {
     bool x = false;
@@ -24,11 +83,11 @@ class _MessagesState extends State<Messages> {
       return Container();
     } else {
       String msg = document['content'];
-      if(msg == null){
-        msg ="";
+      if (msg == null) {
+        msg = "";
       }
-      if(msg.length > 25){
-        msg = msg.substring(0,24) + '...';
+      if (msg.length > 25) {
+        msg = msg.substring(0, 24) + '...';
       }
       return Container(
         child: FlatButton(
@@ -37,13 +96,13 @@ class _MessagesState extends State<Messages> {
               Material(
                 child: CachedNetworkImage(
                   placeholder: (context, url) => Container(
-                    child: Image.asset(
-                      'images/profile.png',
-                    ),
-                    width: 50.0,
-                    height: 50.0,
-                    padding: EdgeInsets.all(15.0),
-                  ),
+                        child: Image.asset(
+                          'images/profile.png',
+                        ),
+                        width: 50.0,
+                        height: 50.0,
+                        padding: EdgeInsets.all(15.0),
+                      ),
                   imageUrl: document['peerImageUrl'],
                   width: 50.0,
                   height: 50.0,
@@ -84,71 +143,19 @@ class _MessagesState extends State<Messages> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => Chat(
-                      chatId: '${document['chatId']?? 'none'}',peerEmail: '${document['peerEmail']?? 'none'}', peerID: '${document['idTo']?? ''}',
-                    )));
+                          chatId: '${document['chatId'] ?? 'none'}',
+                          peerEmail: '${document['peerEmail'] ?? 'none'}',
+                          peerID: '${document['idTo'] ?? ''}',
+                          msg: "",
+                        )));
           },
           color: Colors.white70,
           padding: EdgeInsets.fromLTRB(25.0, 10.0, 25.0, 10.0),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
         ),
         margin: EdgeInsets.only(bottom: 10.0, left: 5.0, right: 5.0),
       );
     }
-  }
-
-
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Messages',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-        ),
-        // centerTitle: true,
-        backgroundColor: Colors.lightBlueAccent,
-      ),
-      body: WillPopScope(
-        child: Stack(
-          children: <Widget>[
-            // List
-            Container(
-              child: StreamBuilder(
-                stream: Firestore.instance.collection('users').document(getUser().email)
-                    .collection("myChats").orderBy('timestamp', descending: true).snapshots(),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) {
-                    return Center(
-                      child: CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
-                      ),
-                    );
-                  } else {
-                    return ListView.builder(
-                      padding: EdgeInsets.all(10.0),
-                      itemBuilder: (context, index) => buildItem(context, snapshot.data.documents[index]),
-                      itemCount: snapshot.data.documents.length,
-                    );
-                  }
-                },
-              ),
-            ),
-
-            // Loading
-            Positioned(
-              child:  isLoading
-                  ? Container(
-                child: Center(
-                  child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.red)),
-                ),
-                color: Colors.white.withOpacity(0.8),
-              )
-                  : Container(),
-            )
-          ],
-        ),
-      ),
-    );
   }
 }

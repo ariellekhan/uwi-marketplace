@@ -5,8 +5,6 @@ import './app_screens/login.dart';
 import './app_screens/signup.dart';
 import 'package:flutter/services.dart';
 
-
-
 void main() {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
@@ -17,7 +15,7 @@ void main() {
 class MyApp extends StatelessWidget {
   static FirebaseAnalytics analytics = FirebaseAnalytics();
   static FirebaseAnalyticsObserver observer =
-  FirebaseAnalyticsObserver(analytics: analytics);
+      FirebaseAnalyticsObserver(analytics: analytics);
   final routes = <String, WidgetBuilder>{
     LoginPage.tag: (context) => LoginPage(),
     SignUp.tag: (context) => SignUp(),
@@ -37,4 +35,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

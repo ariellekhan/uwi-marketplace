@@ -13,45 +13,47 @@ String _imageUrl = "";
 class _FeedState extends State<Feed> {
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: new Scaffold(
-          appBar: new AppBar(
-            actions: <Widget>[
-              IconButton(
-                icon: Icon(Icons.search),
-                onPressed: () {
-                  showSearch(context: context, delegate: Search());
-                },
-              ),
-            ],
-            title: new Text("Search Feed"),
-            backgroundColor: Colors.orange,
-          ),
-          body: new StreamBuilder<QuerySnapshot>(
-            stream: Firestore.instance
-                .collection('allItems')
-                .orderBy("date", descending: true)
-                .snapshots(),
-            builder:
-                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-              if (!snapshot.hasData) {
-                return Center(
-                    child: CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(Colors.red)));
-              } else {
-                return ListView.separated(
-                  itemBuilder: (context, index) =>
-                      buildItemsList(context, snapshot.data.documents[index]),
-                  itemCount: snapshot.data.documents.length,
-                  separatorBuilder: (context, index) => Divider(
-                        color: Colors.black,
-                      ),
-                );
-              }
+    return new Scaffold(
+      appBar: new AppBar(
+        leading: new Container(),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+              showSearch(context: context, delegate: Search());
             },
           ),
-        ));
+        ],
+        title: Text(
+          'Search Feed',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.orange,
+      ),
+      body: new StreamBuilder<QuerySnapshot>(
+        stream: Firestore.instance
+            .collection('allItems')
+            .orderBy("date", descending: true)
+            .snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (!snapshot.hasData) {
+            return Center(
+                child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.red)));
+          } else {
+            return ListView.separated(
+              itemBuilder: (context, index) =>
+                  buildItemsList(context, snapshot.data.documents[index]),
+              itemCount: snapshot.data.documents.length,
+              separatorBuilder: (context, index) => Divider(
+                    color: Colors.black,
+                  ),
+            );
+          }
+        },
+      ),
+    );
   }
 }
 
@@ -111,14 +113,13 @@ class Search extends SearchDelegate<String> {
               return Text("No Item found");
             }
 
-
             return ListView.separated(
               itemBuilder: (context, index) =>
                   buildItemsList(context, results[index]),
               itemCount: results.length,
               separatorBuilder: (context, index) => Divider(
-                color: Colors.black,
-              ),
+                    color: Colors.black,
+                  ),
             );
           }
         },
@@ -158,16 +159,14 @@ class Search extends SearchDelegate<String> {
               return Text("No Item found");
             }
 
-
             return ListView.separated(
               itemBuilder: (context, index) =>
                   buildItemsList(context, results[index]),
               itemCount: results.length,
               separatorBuilder: (context, index) => Divider(
-                color: Colors.black,
-              ),
+                    color: Colors.black,
+                  ),
             );
-
           }
         },
       ),

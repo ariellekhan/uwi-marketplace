@@ -21,7 +21,12 @@ class _HomeState extends State<Home> {
 
     final body = new Scaffold(
       appBar: new AppBar(
-        title: new Text("Home"),
+        title: Text(
+          'Home',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+        leading: new Container(),
         elevation: 0.0,
         backgroundColor: Colors.pink,
         actions: <Widget>[
@@ -381,7 +386,9 @@ class _HomeState extends State<Home> {
           return AlertDialog(
               title: new Text("Help"),
               content: new Text(
-                  "1. To list an item for sale, Navigate to Categories and click on the icon at the top right of the app bar.\n\n2. To Favourite an item, click on the heart icon on the item details page"),
+                  "1. To list an item for sale, Navigate to the CATEGORIES page and click on the icon at the top right of the app bar.\n\n"
+                  "2. To Favourite an item, click on the heart icon on the item details page\n\n"
+                  "These Items will then be added to your HOME page"),
               actions: <Widget>[
                 new FlatButton(
                     onPressed: () {

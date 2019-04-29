@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:io';
 import "package:image_picker/image_picker.dart";
-import 'package:random_string/random_string.dart' as random;
 import 'package:firebase_storage/firebase_storage.dart';
 
 class SignUp extends StatefulWidget {
@@ -103,9 +101,6 @@ class _SignUpState extends State<SignUp> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
         ),
-//        onPressed: () {
-//          Navigator.of(context).pushNamed(LoginPage.tag);
-//        },
         onPressed: _validateInputs,
         padding: EdgeInsets.all(12),
         color: Colors.lightBlueAccent,
@@ -127,7 +122,7 @@ class _SignUpState extends State<SignUp> {
           style: TextStyle(color: Colors.black54),
         ),
         onPressed: () {
-          Navigator.of(context).pushNamed(LoginPage.tag);
+          Navigator.of(context).pop();
         });
 
     final uploadBtn = Padding(
@@ -229,7 +224,10 @@ class _SignUpState extends State<SignUp> {
       fbuser.sendEmailVerification(); //sends verification email
       //Add user info to firebase
       await _uploadToFirestore().then((_) {
-        _showAlert("User Created", "Sign up Successful. Please check your email for verification link.", true);
+        _showAlert(
+            "User Created",
+            "Sign up Successful. Please check your email for verification link.",
+            true);
       }).catchError((e) {});
     } catch (e) {
       if (e.toString().contains("ERROR_EMAIL_ALREADY_IN_USE")) {
@@ -248,7 +246,9 @@ class _SignUpState extends State<SignUp> {
   //uploads data to the firestore
   Future _uploadToFirestore() async {
     if (_userImage != null) {
-      addImageToFirebase(DateTime.now().millisecondsSinceEpoch.toString(), _userImage).then((_) async{
+      addImageToFirebase(
+              DateTime.now().millisecondsSinceEpoch.toString(), _userImage)
+          .then((_) async {
         await addToDatabase();
       }).catchError((e) {});
     } else {
@@ -326,7 +326,7 @@ class _SignUpState extends State<SignUp> {
                     _userImage = null;
                     _imageUrl = "";
                     Navigator.of(context).pop();
-                    Navigator.of(context).pushNamed(LoginPage.tag);
+                    Navigator.of(context).pop();
                   } else {
                     Navigator.of(context).pop();
                   }
