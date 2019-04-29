@@ -27,7 +27,12 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Profile"),
+        leading: new Container(),
+        title: Text(
+          'My Profile',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
         backgroundColor: Colors.green,
       ),
       body: myProfile == null
@@ -45,26 +50,24 @@ class _ProfileState extends State<Profile> {
     try {
       ds = await Firestore.instance
           .collection("users")
-          .document(getUser().email).collection('userInfo').document(getUser().email)
+          .document(getUser().email)
+          .collection('userInfo')
+          .document(getUser().email)
           .get();
     } catch (e) {
-      ds= null;
+      ds = null;
     }
     return ds;
   }
 
   Widget buildProfile(DocumentSnapshot document) {
-    try{
+    try {
       document['email'];
+    } catch (e) {
+      return Container(child: Text("No user data found "));
     }
-    catch(e){
-    return Container(child: Text("No user data found "));
-    }
-
 
     String _imageUrl = '${document['userImage']}';
-
-
 
     final logo = Hero(
       tag: 'hero',
@@ -137,14 +140,11 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  Future <LoginPage> _signOut()  async{
+  Future<LoginPage> _signOut() async {
     await FirebaseAuth.instance.signOut();
     setUser(null);
-    runApp(
-        new MaterialApp(
-          home: new LoginPage(),
-        )
-
-    );
+    runApp(new MaterialApp(
+      home: new LoginPage(),
+    ));
   }
 }

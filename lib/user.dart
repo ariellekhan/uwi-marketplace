@@ -6,6 +6,6 @@ class User {
   final String userImage;
   final String uuid;
 
-
-  User(this.email, this.major, this.name, this.phone, this.userImage, this.uuid);
+  User(
+      this.email, this.major, this.name, this.phone, this.userImage, this.uuid);
 }

@@ -13,6 +13,18 @@ class ItemInfo {
   final String status;
   final String date;
 
-  ItemInfo(this.name, this.description, this.address, this.author, this.degree, this.imageUrl, this.price, this.category, this.productID, this.sellerEmail, this.sellerID, this.status, this.date);
-
+  ItemInfo(
+      this.name,
+      this.description,
+      this.address,
+      this.author,
+      this.degree,
+      this.imageUrl,
+      this.price,
+      this.category,
+      this.productID,
+      this.sellerEmail,
+      this.sellerID,
+      this.status,
+      this.date);
 }

@@ -379,9 +379,13 @@ class _ItemFormState extends State<ItemForm> {
               new FlatButton(
                 onPressed: () {
                   Navigator.pop(context);
+                  Navigator.pop(context);
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => new NavBar()),
+                    MaterialPageRoute(
+                        builder: (context) => new NavBar(
+                              pageIndex: 2,
+                            )),
                   );
                 },
                 child: new Text("close"),

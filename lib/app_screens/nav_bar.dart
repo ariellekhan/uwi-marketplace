@@ -6,14 +6,22 @@ import 'categories.dart';
 import 'home.dart';
 
 class NavBar extends StatefulWidget {
+  final int pageIndex;
+  NavBar({Key key, @required this.pageIndex}) : super(key: key);
   @override
   _NavBarState createState() => new _NavBarState();
 }
 
 class _NavBarState extends State<NavBar> {
+  int currentTabIndex;
+
+  @override
+  initState() {
+    super.initState();
+    currentTabIndex = widget.pageIndex;
+  }
 
   //For bottom navigation bar
-  int currentTabIndex = 2;
   List<Widget> tabs = [
     Feed(),
     Categories(),
@@ -29,11 +37,8 @@ class _NavBarState extends State<NavBar> {
   }
 
   @override
-  Widget build(BuildContext context) =>
-      Scaffold(
-
+  Widget build(BuildContext context) => Scaffold(
         body: tabs[currentTabIndex],
-
         bottomNavigationBar: BottomNavigationBar(
           onTap: onTapped,
           currentIndex: currentTabIndex,
@@ -52,21 +57,16 @@ class _NavBarState extends State<NavBar> {
             BottomNavigationBarItem(
                 backgroundColor: Colors.pink,
                 icon: Icon(Icons.home),
-                title: Text('Home')
-            ),
+                title: Text('Home')),
             BottomNavigationBarItem(
                 backgroundColor: Colors.lightBlueAccent,
                 icon: Icon(Icons.mail),
-                title: Text('Messages')
-            ),
+                title: Text('Messages')),
             BottomNavigationBarItem(
                 backgroundColor: Colors.green,
                 icon: Icon(Icons.person),
-                title: Text('Profile')
-            ),
+                title: Text('Profile')),
           ],
         ),
-
-
       );
 }

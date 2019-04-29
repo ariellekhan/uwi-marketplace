@@ -125,7 +125,10 @@ class _LoginPageState extends State<LoginPage> {
         print('Signed in ${user.email}');
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => NavBar()),
+          MaterialPageRoute(
+              builder: (context) => NavBar(
+                    pageIndex: 2,
+                  )),
         );
       } else {
         _showEmailVerificationAlert(user);
@@ -136,8 +139,6 @@ class _LoginPageState extends State<LoginPage> {
       _showIncorrectAlert();
     }
   }
-
-
 
   //resets the user password
   void _resetPassword() {

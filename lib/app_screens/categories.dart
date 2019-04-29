@@ -13,7 +13,12 @@ class _CategoriesState extends State<Categories> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: Text("Categories"),
+          leading: new Container(),
+          centerTitle: true,
+          title: Text(
+            'Categories',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
           backgroundColor: Colors.purple,
           actions: <Widget>[
             IconButton(
@@ -200,7 +205,7 @@ class _CategoriesState extends State<Categories> {
                       children: <Widget>[
                         Icon(Icons.category),
                         Text(
-                          "Misc. Items",
+                          "Misc.\nItems",
                           textAlign: TextAlign.center,
                         ),
                       ],

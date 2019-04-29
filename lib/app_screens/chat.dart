@@ -5,16 +5,19 @@ import 'package:intl/intl.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../authentication.dart';
 import '../user.dart';
+import 'package:ntp/ntp.dart';
 
 class Chat extends StatefulWidget {
   final String chatId;
   final String peerEmail;
   final String peerID;
+  final String msg;
   Chat(
       {Key key,
       @required this.chatId,
       @required this.peerEmail,
-      @required this.peerID})
+      @required this.peerID,
+      @required this.msg})
       : super(key: key);
 
   @override
@@ -24,15 +27,21 @@ class Chat extends StatefulWidget {
 class _ChatState extends State<Chat> {
   String _title = "CHAT";
   @override
+  void didUpdateWidget(Widget oldWidget) {}
+
+  @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text(_title,
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-        ),
-        centerTitle: true,
+    final myAppBar = new AppBar(
+      title: new Text(
+        _title,
+        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
       ),
-        backgroundColor: Color.fromRGBO(237, 237, 237, 1.0),
+      centerTitle: true,
+    );
+
+    return new Scaffold(
+      appBar: myAppBar,
+      backgroundColor: Color.fromRGBO(237, 237, 237, 1.0),
       body: new StreamBuilder(
         stream: Firestore.instance
             .collection('users')
@@ -49,10 +58,14 @@ class _ChatState extends State<Chat> {
             var doc = snapshot.data; //userData
             User peerInfo = new User(doc['email'], doc['major'], doc['name'],
                 doc['phone'], doc['userImage'], widget.peerID);
-            setState(){
-              _title = peerInfo.name;
-            }
-            return new ChatScreen(chatId: widget.chatId, peerInfo: peerInfo);
+            _title = peerInfo.name;
+
+            didUpdateWidget(myAppBar);
+            return new ChatScreen(
+              chatId: widget.chatId,
+              peerInfo: peerInfo,
+              msg: widget.msg,
+            );
           }
         },
       ),
@@ -63,8 +76,13 @@ class _ChatState extends State<Chat> {
 class ChatScreen extends StatefulWidget {
   final String chatId;
   final User peerInfo;
+  final String msg;
 
-  ChatScreen({Key key, @required this.chatId, @required this.peerInfo})
+  ChatScreen(
+      {Key key,
+      @required this.chatId,
+      @required this.peerInfo,
+      @required this.msg})
       : super(key: key);
 
   @override
@@ -72,6 +90,10 @@ class ChatScreen extends StatefulWidget {
 }
 
 class ChatScreenState extends State<ChatScreen> {
+  DateTime _currentTime;
+  DateTime _ntpTime;
+  int _ntpOffset;
+
   String id;
   var listMessage;
   String chatId;
@@ -94,84 +116,88 @@ class ChatScreenState extends State<ChatScreen> {
 
     isLoading = false;
     id = getUser().uid;
+    if (widget.msg != "" && widget.msg != null) {
+      onSendMessage(widget.msg, 0);
+    }
   }
 
-  void sendMessage(String content, int type) {
-    // type: 0 = text, 1 = image, 2 = sticker
+  void sendMessage(String content, int type) async {
     if (content.trim() != '') {
       textEditingController.clear();
 
       //allChats
 
-      var documentReference = Firestore.instance
-          .collection('messages')
-          .document(chatId)
-          .collection("chat")
-          .document(DateTime.now().millisecondsSinceEpoch.toString());
+      await _updateTime().then((_) async {
+        var documentReference = Firestore.instance
+            .collection('messages')
+            .document(chatId)
+            .collection("chat")
+            .document(_ntpTime.millisecondsSinceEpoch.toString());
 
-      Firestore.instance.runTransaction((transaction) async {
-        await transaction.set(
-          documentReference,
-          {
-            'idFrom': id,
-            'idTo': widget.peerInfo.uuid,
-            'peerEmail': widget.peerInfo.email,
-            'timestamp': DateTime.now().millisecondsSinceEpoch.toString(),
-            'content': content,
-            'type': type
-          },
-        );
-      });
+        Firestore.instance.runTransaction((transaction) async {
+          await transaction.set(
+            documentReference,
+            {
+              'idFrom': id,
+              'idTo': widget.peerInfo.uuid,
+              'peerEmail': widget.peerInfo.email,
+              'timestamp': _ntpTime.millisecondsSinceEpoch.toString(),
+              'content': content,
+              'type': type
+            },
+          );
+        });
 
-      //myChat
-      var documentReference2 = Firestore.instance
-          .collection('users')
-          .document(getUser().email)
-          .collection("myChats")
-          .document(chatId);
+        //myChat
+        var documentReference2 = Firestore.instance
+            .collection('users')
+            .document(getUser().email)
+            .collection("myChats")
+            .document(chatId);
 
-      Firestore.instance.runTransaction((transaction) async {
-        await transaction.set(
-          documentReference2,
-          {
-            'content': content,
-            'idFrom': id,
-            'idTo': widget.peerInfo.uuid,
-            'peerEmail': widget.peerInfo.email,
-            'peerName': widget.peerInfo.name,
-            'peerImageUrl': widget.peerInfo.userImage,
-            'timestamp': DateTime.now().millisecondsSinceEpoch.toString(),
-            'chatId': chatId
-          },
-        );
-      });
+        Firestore.instance.runTransaction((transaction) async {
+          await transaction.set(
+            documentReference2,
+            {
+              'content': content,
+              'idFrom': id,
+              'idTo': widget.peerInfo.uuid,
+              'peerEmail': widget.peerInfo.email,
+              'peerName': widget.peerInfo.name,
+              'peerImageUrl': widget.peerInfo.userImage,
+              'timestamp': _ntpTime.millisecondsSinceEpoch.toString(),
+              'chatId': chatId
+            },
+          );
+        });
 
-      //peerChat
-      var documentReference3 = Firestore.instance
-          .collection('users')
-          .document(widget.peerInfo.email)
-          .collection("myChats")
-          .document(chatId);
+        //peerChat
+        var documentReference3 = Firestore.instance
+            .collection('users')
+            .document(widget.peerInfo.email)
+            .collection("myChats")
+            .document(chatId);
 
-      Firestore.instance.runTransaction((transaction) async {
-        await transaction.set(
-          documentReference3,
-          {
-            'content': content,
-            'idFrom': id,
-            'idTo': widget.peerInfo.uuid,
-            'peerEmail': getUser().email,
-            'peerName': _myName,
-            'peerImageUrl': _myImageUrl,
-            'timestamp': DateTime.now().millisecondsSinceEpoch.toString(),
-            'chatId': chatId
-          },
-        );
-      });
-      listScrollController.animateTo(0.0,
-          duration: Duration(milliseconds: 300), curve: Curves.easeOut);
+        Firestore.instance.runTransaction((transaction) async {
+          await transaction.set(
+            documentReference3,
+            {
+              'content': content,
+              'idFrom': id,
+              'idTo': widget.peerInfo.uuid,
+              'peerEmail': getUser().email,
+              'peerName': _myName,
+              'peerImageUrl': _myImageUrl,
+              'timestamp': _ntpTime.millisecondsSinceEpoch.toString(),
+              'chatId': chatId
+            },
+          );
+        });
+        listScrollController.animateTo(0.0,
+            duration: Duration(milliseconds: 300), curve: Curves.easeOut);
+      }).catchError((e) {});
     } else {
-      //generate nothing to send
+      //do nothing
     }
   }
 
@@ -228,12 +254,7 @@ class ChatScreenState extends State<ChatScreen> {
                       bottom: isLastMessageRight(index) ? 20.0 : 10.0,
                       right: 10.0),
                 )
-              : document['type'] == 1
-                  // Image
-                  ? Container()
-
-                  // Sticker
-                  : Container(),
+              : Container(),
         ],
         mainAxisAlignment: MainAxisAlignment.end,
       );
@@ -248,7 +269,7 @@ class ChatScreenState extends State<ChatScreen> {
                     ? Material(
                         child: CachedNetworkImage(
                           placeholder: (context, url) => Container(
-                                child:  Image.asset(
+                                child: Image.asset(
                                   'images/profile.png',
                                 ),
                                 width: 35.0,
@@ -430,18 +451,17 @@ class ChatScreenState extends State<ChatScreen> {
     return Container(
       child: Row(
         children: <Widget>[
-          // Button send image
           Material(
             child: new Container(
               margin: new EdgeInsets.symmetric(horizontal: 1.0),
               child: new IconButton(
-                icon: new Icon(Icons.image),
+                icon: new Icon(Icons.message),
               ),
             ),
             color: Colors.white,
           ),
 
-          // Edit text
+          // type text
           Flexible(
             child: Container(
               child: TextField(
@@ -456,7 +476,7 @@ class ChatScreenState extends State<ChatScreen> {
             ),
           ),
 
-          // Button send message
+          // send message
           Material(
             child: new Container(
               margin: new EdgeInsets.symmetric(horizontal: 8.0),
@@ -512,5 +532,15 @@ class ChatScreenState extends State<ChatScreen> {
               },
             ),
     );
+  }
+
+  Future _updateTime() async {
+    _currentTime = DateTime.now();
+    await NTP.getNtpOffset().then((value) {
+      setState(() {
+        _ntpOffset = value;
+        _ntpTime = _currentTime.add(Duration(milliseconds: _ntpOffset));
+      });
+    });
   }
 }
