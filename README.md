@@ -9,15 +9,19 @@ It has useful features like a chat, newsfeed, favorites list, and auto-fill for 
 It was developed using Google's increasingly popular framework Flutter and SCRUM methodology ​
 
 ## Running UWI MARKETPLACE 
-Start Android Studio.
+1. Using Android Studio.
 
-Open plugin preferences (Preferences > Plugins on macOS, File > Settings > Plugins on Windows & Linux).
+2. Open plugin preferences (Preferences > Plugins on macOS, File > Settings > Plugins on Windows & Linux).
 
-Select Browse repositories, select the Flutter plugin and click Install.
+3. Select Browse repositories, select the Flutter plugin and click Install.
 
-Click Yes when prompted to install the Dart plugin.
+4. Click Yes when prompted to install the Dart plugin.
 
-Click Restart when prompted.
+5. Click Restart when prompted.
 
-Open project in Android Studio 
+6. Import project from github using this link: https://github.com/ariellekhan/uwi-marketplace
+
+7. Flutter-get Dependicies
+
+8. Run main.dart on Android device
 
