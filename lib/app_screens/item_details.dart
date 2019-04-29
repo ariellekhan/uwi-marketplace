@@ -42,15 +42,15 @@ class _ItemDetailsState extends State<ItemDetails> {
       padding: EdgeInsets.only(right: 12.0),
       child: _imageUrl == ""
           ? Image.asset(
-              'images/placeholder.png',
-              height: 200.0,
-              width: 200.0,
-            )
+        'images/placeholder.png',
+        height: 200.0,
+        width: 200.0,
+      )
           : Image.network(
-              _imageUrl,
-              height: 200.0,
-              width: 200.0,
-            ),
+        _imageUrl,
+        height: 200.0,
+        width: 200.0,
+      ),
     );
 
     final name = Center(
@@ -59,6 +59,7 @@ class _ItemDetailsState extends State<ItemDetails> {
         child: Text(
           '${widget.itemInfo.name}',
           style: TextStyle(color: Colors.deepOrangeAccent, fontSize: 24),
+          textAlign: TextAlign.center,
         ),
       ),
     );
@@ -99,6 +100,16 @@ class _ItemDetailsState extends State<ItemDetails> {
         child: Text(
           'Address: ${widget.itemInfo.address}',
           style: TextStyle(color: Colors.black, fontSize: 19),
+        ),
+      ),
+    );
+
+    final proID = Center(
+      child: Padding(
+        padding: EdgeInsets.all(5.0),
+        child: Text(
+          'ID: ${widget.itemInfo.productID}',
+          style: TextStyle(color: Colors.grey, fontSize: 14 ),
         ),
       ),
     );
@@ -154,6 +165,7 @@ class _ItemDetailsState extends State<ItemDetails> {
           SizedBox(height: 8.0),
           favIcon,
           orderButton,
+          proID,
         ];
       } else if (widget.itemInfo.category == "Dorm") {
         return <Widget>[
@@ -169,6 +181,7 @@ class _ItemDetailsState extends State<ItemDetails> {
           SizedBox(height: 8.0),
           favIcon,
           orderButton,
+          proID,
         ];
       } else {
         return <Widget>[
@@ -182,6 +195,7 @@ class _ItemDetailsState extends State<ItemDetails> {
           SizedBox(height: 8.0),
           favIcon,
           orderButton,
+          proID,
         ];
       }
     }
